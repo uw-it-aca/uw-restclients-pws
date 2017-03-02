@@ -11,9 +11,10 @@ from uw_pws.dao import PWS_DAO
 from uw_pws.models import Person, Entity
 try:
     from io import StringIO
+    from urllib.parse import urlencode
 except ImportError:
     from StringIO import StringIO
-from urllib import urlencode
+    from urllib import urlencode
 import json
 import re
 
