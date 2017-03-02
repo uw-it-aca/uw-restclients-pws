@@ -6,7 +6,8 @@ python:
 - '3.5'
 - '3.6'
 before_script:
-- pip install -e .
+#- pip install -e .
+- pip install -e git+https://github.com/uw-it-aca/uw-restclients-core.git@feature/starting-on-mock#egg=uw-restclients-core
 - pip install pep8
 - pip install nose2
 - pip install coverage
