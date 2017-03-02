@@ -9,7 +9,10 @@ from uw_pws.exceptions import (InvalidStudentNumber, InvalidIdCardPhotoSize,
                                InvalidProxRFID)
 from uw_pws.dao import PWS_DAO
 from uw_pws.models import Person, Entity
-from StringIO import StringIO
+try:
+    from io import StringIO
+except ImportError:
+    from StringIO import StringIO
 from urllib import urlencode
 import json
 import re
