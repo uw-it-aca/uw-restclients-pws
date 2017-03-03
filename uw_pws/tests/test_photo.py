@@ -43,7 +43,6 @@ class IdCardTestPhoto(TestCase):
             size = img.getbuffer().nbytes
             self.assertEquals(size, 4661, "Correct file for default size")
 
-
         # Invalid size param, should throw exceptions
         self.assertRaises(InvalidIdCardPhotoSize, pws.get_idcard_photo,
                           person.uwregid, "tiny")
