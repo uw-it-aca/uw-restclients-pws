@@ -1,0 +1,32 @@
+sudo: false
+language: python
+python:
+- '2.7'
+- '3.4'
+- '3.5'
+- '3.6'
+before_script:
+- pip install -e .
+- pip install pep8
+- pip install nose2
+- pip install coverage
+- pip install commonconf
+- pip install python-coveralls
+script:
+- pep8 uw_pws
+- coverage run uw_pws/test.py -v
+after_script:
+- coveralls
+before_deploy:
+- find uw_pws/ -name \*.pyc -exec rm {} \;
+- echo $TRAVIS_TAG > uw_pws/VERSION
+deploy:
+  provider: pypi
+  server: https://pypi.python.org/pypi
+  user: uw-it-aca
+  skip_cleanup: true
+  password:
+    secure: TI/EdGa7G/1aVdy79Y5bmYi8trspAlhnaNYQiHbHOk27EZRsJLuLddryJKOEaNmcXKxib6tjV/rfax3SQyDDio8f3vcLzgKRdJjc6bYeZeWyRUjQyA8LLPFFL4T4/eIcl/h8IuRpgxgO9scz8d2znGI5vIOjExSHZY7pnhu0tBfMr4p9aLqkKU60YF3fu5VbB5XeXZGYwUCKp9gGpNehmG04cT2Hn4yOI8Jo4NIOkRM6zHjCzWXUlNSbcMl3boEF4aTjBWVNqUGNwujkgmjL9+JblO8PbKv3CiOY2XNFCNKFibcf9wPqrWrC56Fix27zoOhYcZCAqTTLpUSaJ416ZNUWEo9jfDKfW3oPSgWFCOTEMPMgHOU96waFjF4aEzf+jhFZcPtx0R3XQyh50OGM12uKCGqV4J7F6pGb655dFiDDNtG0Fu6i3Tjz+Z3d0qPZ+fUayhOh6QchfS2ueQ5jq9ux+BZU73EllyJ05drwwqRlHRhtjNIa9eRqKhGoGp6TxqDbpDYDZAJyDKBa8IKPYpylDOmMAu/spS0KkFa8I0Wzxj0k+U7JVk1MhxCbihwqzY8gkdA2x9mfOVU2yQ8ISM4saKTRsK5lmGFPhh7HldXYbYZ5BOCcIXewjDtjrx3qT5Qxn3KBzU6RN7RQEDdz4NZSecUivdg1LVUH7rDtXRw=
+  on:
+    tags: true
+    python: '3.5'
