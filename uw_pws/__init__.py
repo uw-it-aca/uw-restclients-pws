@@ -10,10 +10,10 @@ from uw_pws.exceptions import (InvalidStudentNumber, InvalidIdCardPhotoSize,
 from uw_pws.dao import PWS_DAO
 from uw_pws.models import Person, Entity
 try:
-    from io import StringIO
+    from io import BytesIO as streamIO
     from urllib.parse import urlencode
 except ImportError:
-    from StringIO import StringIO
+    from StringIO import StringIO as streamIO
     from urllib import urlencode
 import json
 import re
@@ -233,7 +233,7 @@ class PWS(object):
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
 
-        return StringIO(response.data)
+        return streamIO(response.data)
 
     def valid_uwnetid(self, netid):
         uwnetid = str(netid)
