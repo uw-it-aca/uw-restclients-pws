@@ -22,6 +22,7 @@ import re
 PERSON_PREFIX = '/identity/v1/person'
 ENTITY_PREFIX = '/identity/v1/entity'
 CARD_PREFIX = '/idcard/v1/card'
+DAO = PWS_DAO()
 
 
 class PWS(object):
@@ -49,9 +50,8 @@ class PWS(object):
         if not self.valid_uwregid(regid):
             raise InvalidRegID(regid)
 
-        dao = PWS_DAO()
         url = "%s/%s/full.json" % (PERSON_PREFIX, regid.upper())
-        response = dao.getURL(url, {"Accept": "application/json"})
+        response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
@@ -67,9 +67,8 @@ class PWS(object):
         if not self.valid_uwnetid(netid):
             raise InvalidNetID(netid)
 
-        dao = PWS_DAO()
         url = "%s/%s/full.json" % (PERSON_PREFIX, netid.lower())
-        response = dao.getURL(url, {"Accept": "application/json"})
+        response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
@@ -87,7 +86,7 @@ class PWS(object):
 
         url = "%s.json?%s" % (PERSON_PREFIX,
                               urlencode({"employee_id": employee_id}))
-        response = PWS_DAO().getURL(url, {"Accept": "application/json"})
+        response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
@@ -111,7 +110,7 @@ class PWS(object):
 
         url = "%s.json?%s" % (PERSON_PREFIX,
                               urlencode({"student_number": student_number}))
-        response = PWS_DAO().getURL(url, {"Accept": "application/json"})
+        response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
@@ -133,10 +132,9 @@ class PWS(object):
         if not self.valid_prox_rfid(prox_rfid):
             raise InvalidProxRFID(prox_rfid)
 
-        dao = PWS_DAO()
         url = "%s.json?%s" % (CARD_PREFIX,
                               urlencode({"prox_rfid": prox_rfid}))
-        response = dao.getURL(url, {"Accept": "application/json"})
+        response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
@@ -157,9 +155,8 @@ class PWS(object):
         if not self.valid_uwregid(regid):
             raise InvalidRegID(regid)
 
-        dao = PWS_DAO()
         url = "%s/%s.json" % (ENTITY_PREFIX, regid.upper())
-        response = dao.getURL(url, {"Accept": "application/json"})
+        response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
@@ -175,9 +172,8 @@ class PWS(object):
         if not self.valid_uwnetid(netid):
             raise InvalidNetID(netid)
 
-        dao = PWS_DAO()
         url = "%s/%s.json" % (ENTITY_PREFIX, netid.lower())
-        response = dao.getURL(url, {"Accept": "application/json"})
+        response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
@@ -191,9 +187,8 @@ class PWS(object):
         if not self.valid_uwregid(regid):
             raise InvalidRegID(regid)
 
-        dao = PWS_DAO()
         url = "%s/%s/full.json" % (PERSON_PREFIX, regid.upper())
-        response = dao.getURL(url, {"Accept": "application/json"})
+        response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status == 404:
             return
@@ -228,7 +223,7 @@ class PWS(object):
                 raise InvalidNetID(self.actas)
             headers["X-UW-Act-as"] = self.actas
 
-        response = PWS_DAO().getURL(url, headers)
+        response = DAO.getURL(url, headers)
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
