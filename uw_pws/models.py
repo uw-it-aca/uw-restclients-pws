@@ -17,9 +17,9 @@ class Person(models.Model):
     full_name = models.CharField(max_length=250)
     display_name = models.CharField(max_length=250)
 
-    student_number = models.CharField(max_length=9)
-    student_system_key = models.SlugField(max_length=10)
-    employee_id = models.CharField(max_length=9)
+    student_number = models.CharField(max_length=9, null=True , default=None)
+    student_system_key = models.SlugField(max_length=10, null=True , default=None)
+    employee_id = models.CharField(max_length=9, null=True , default=None)
 
     is_student = models.NullBooleanField()
     is_staff = models.NullBooleanField()
@@ -27,24 +27,27 @@ class Person(models.Model):
     is_alum = models.NullBooleanField()
     is_faculty = models.NullBooleanField()
 
-    email1 = models.CharField(max_length=255)
-    email2 = models.CharField(max_length=255)
-    phone1 = models.CharField(max_length=255)
-    phone2 = models.CharField(max_length=255)
-    voicemail = models.CharField(max_length=255)
-    fax = models.CharField(max_length=255)
-    touchdial = models.CharField(max_length=255)
-    address1 = models.CharField(max_length=255)
-    address2 = models.CharField(max_length=255)
+    email1 = models.CharField(max_length=255, null=True , default=None)
+    email2 = models.CharField(max_length=255, null=True , default=None)
+    phone1 = models.CharField(max_length=255, null=True , default=None)
+    phone2 = models.CharField(max_length=255, null=True , default=None)
+    voicemail = models.CharField(max_length=255, null=True , default=None)
+    fax = models.CharField(max_length=255, null=True , default=None)
+    touchdial = models.CharField(max_length=255, null=True , default=None)
+    address1 = models.CharField(max_length=255, null=True , default=None)
+    address2 = models.CharField(max_length=255, null=True , default=None)
     mailstop = models.CharField(max_length=255)
     title1 = models.CharField(max_length=255)
-    title2 = models.CharField(max_length=255)
+    title2 = models.CharField(max_length=255, null=True , default=None)
+    department1 = models.CharField(max_length=255, null=True , default=None)
+    department2 = models.CharField(max_length=255, null=True , default=None)
     home_department = models.CharField(max_length=255)
+    publish_in_emp_directory = models.BooleanField()
 
-    student_class = models.CharField(max_length=255)
-    student_department1 = models.CharField(max_length=255)
-    student_department2 = models.CharField(max_length=255)
-    student_department3 = models.CharField(max_length=255)
+    student_class = models.CharField(max_length=255, null=True , default=None)
+    student_department1 = models.CharField(max_length=255, null=True , default=None)
+    student_department2 = models.CharField(max_length=255, null=True , default=None)
+    student_department3 = models.CharField(max_length=255, null=True , default=None)
 
     def json_data(self):
         return {'uwnetid': self.uwnetid,
@@ -65,7 +68,10 @@ class Person(models.Model):
                 'address1': self.address1,
                 'address2': self.address2,
                 'mailstop': self.mailstop,
+                'department1': self.department1,
+                'department2': self.department2,
                 'home_department': self.home_department,
+                'publish_in_emp_directory': self.publish_in_emp_directory,
                 }
 
     def __eq__(self, other):

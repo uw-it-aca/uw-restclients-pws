@@ -155,13 +155,6 @@ class PWSTestPersonData(TestCase):
         self.assertEquals(person2.student_department2, None)
         self.assertEquals(person2.student_department3, None)
 
-    def test_missing_person_affiliations(self):
-        pws = PWS()
-        person = pws.get_person_by_netid("bill")
-        self.assertEquals(person.employee_id, u'')
-        self.assertEquals(person.student_number, u'')
-        self.assertEquals(person.student_class, u'')
-
     def _test_regid(self, netid, regid):
         pws = PWS()
         person = pws.get_person_by_regid(regid)
@@ -175,3 +168,20 @@ class PWSTestPersonData(TestCase):
 
         self.assertEquals(person.uwnetid, netid, netid + "'s netid")
         self.assertEquals(person.uwregid, regid, netid + "'s regid")
+
+    def test_employee_data(self):
+        pws = PWS()
+        person = pws.get_person_by_netid('bill')
+        data = person.json_data()
+        self.assertTrue(data.get('whitepages_publish'))
+        self.assertTrue(data.get('department1'))
+        self.assertTrue('department2' in data)
+        self.assertTrue(data.get('home_department'))
+        self.assertTrue(data.get('publish_in_emp_directory'))
+        self.assertTrue('email1' in data)
+        self.assertTrue('email2' in data)
+        self.assertTrue('fax' in data)
+        self.assertTrue('phone1' in data)
+        self.assertTrue('phone2' in data)
+        self.assertTrue(data.get('title1'))
+        self.assertTrue('title2' in data)
