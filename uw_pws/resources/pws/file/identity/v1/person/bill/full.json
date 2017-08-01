@@ -1,1 +1,53 @@
-{"DisplayName":"BILL AVERAGE TEACHER","EduPersonAffiliations":["member","alum","staff","employee"],"IsTestEntity":true,"PriorUWNetIDs":[],"PriorUWRegIDs":[],"RegisteredFirstMiddleName":"BILL AVERAGE","RegisteredName":"BILL AVERAGE TEACHER","RegisteredSurname":"TEACHER","UIDNumber":"14129","UWNetID":"bill","UWRegID":"FBB38FE46A7C11D5A4AE0004AC494FFE","WhitepagesPublish":true,"PersonAffiliations":{"PersonFullURI":{"DisplayName":"BILL AVERAGE TEACHER","Href":"\/identity\/v1\/person\/FBB38FE46A7C11D5A4AE0004AC494FFE\/full.json","UWNetID":"bill","UWRegID":"FBB38FE46A7C11D5A4AE0004AC494FFE"}}}
+{
+"DisplayName":"Bill Average Teacher",
+"EduPersonAffiliations":["member",
+                         "alum",
+                         "faculty",
+                         "staff",
+                         "employee"],
+"IsTestEntity":false,
+"PriorUWNetIDs":[],
+"PriorUWRegIDs":[],
+"RegisteredFirstMiddleName":"Bill Average",
+"RegisteredName":"Bill Average Teacher",
+"RegisteredSurname":"Teacher",
+"UIDNumber":"11111",
+"UWNetID":"bill",
+"UWRegID":"FBB38FE46A7C11D5A4AE0004AC494FFE",
+"WhitepagesPublish":true,
+"PersonAffiliations":{
+    "AlumPersonAffiliation":{
+        "DevelopmentID":"0000111111"},
+    "EmployeePersonAffiliation":{
+        "EmployeeID":"111111111",
+        "EmployeeWhitePages":{
+            "Address1":null,
+            "Address2":null,
+            "Department1":"ENG: Materials Science and Engineering",
+            "Department2":null,
+            "Email1":null,
+            "Email2":null,
+            "Fax":null,
+            "Name":null,
+            "Phone1":null,
+            "Phone2":null,
+            "PublishInDirectory":true,
+            "Title1":"Lab Manager",
+            "Title2":null,
+            "TouchDial":null,
+            "VoiceMail":null},
+        "HomeDepartment":"ENG: Materials Science and Engineering",
+        "MailStop":"123400"},
+    "StudentPersonAffiliation":{
+        "StudentNumber":"0111111",
+        "StudentSystemKey":"000111111",
+        "StudentWhitePages":{
+            "Class":null,
+            "Department1":null,
+            "Department2":null,
+            "Department3":null,
+            "Email":null,
+            "Name":null,
+            "Phone":null,
+            "PublishInDirectory":false}}
+}}

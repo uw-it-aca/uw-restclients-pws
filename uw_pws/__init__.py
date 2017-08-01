@@ -301,11 +301,10 @@ class PWS(object):
             employee = affiliations["EmployeePersonAffiliation"]
             person.mailstop = employee["MailStop"]
             person.home_department = employee["HomeDepartment"]
-
             white_pages = employee["EmployeeWhitePages"]
-            if not white_pages["PublishInDirectory"]:
-                person.whitepages_publish = False
-            else:
+            person.publish_in_emp_directory = white_pages["PublishInDirectory"]
+
+            if person.publish_in_emp_directory:
                 person.email1 = white_pages["Email1"]
                 person.email2 = white_pages["Email2"]
                 person.phone1 = white_pages["Phone1"]
@@ -317,6 +316,9 @@ class PWS(object):
                 person.touchdial = white_pages["TouchDial"]
                 person.address1 = white_pages["Address1"]
                 person.address2 = white_pages["Address2"]
+                person.department1 = white_pages["Department1"]
+                person.department2 = white_pages["Department2"]
+
         if "StudentPersonAffiliation" in affiliations and person.is_student:
             student = affiliations["StudentPersonAffiliation"]
             if "StudentWhitePages" in student:
