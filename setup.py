@@ -23,7 +23,8 @@ setup(
     author_email="aca-it@uw.edu",
     include_package_data=True,
     install_requires=[
-                      'UW-RestClients-Core<1.0'
+                      'UW-RestClients-Core<1.0',
+                      'nameparser>=0.2.9'
                      ],
     license='Apache License, Version 2.0',
     description=('A library for connecting to the Person Web Service at the '
