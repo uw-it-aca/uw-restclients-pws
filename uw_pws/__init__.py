@@ -22,6 +22,7 @@ import re
 PERSON_PREFIX = '/identity/v1/person'
 ENTITY_PREFIX = '/identity/v1/entity'
 CARD_PREFIX = '/idcard/v1/card'
+DAO = PWS_DAO()
 
 
 class PWS(object):
@@ -49,9 +50,8 @@ class PWS(object):
         if not self.valid_uwregid(regid):
             raise InvalidRegID(regid)
 
-        dao = PWS_DAO()
         url = "%s/%s/full.json" % (PERSON_PREFIX, regid.upper())
-        response = dao.getURL(url, {"Accept": "application/json"})
+        response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
@@ -67,9 +67,8 @@ class PWS(object):
         if not self.valid_uwnetid(netid):
             raise InvalidNetID(netid)
 
-        dao = PWS_DAO()
         url = "%s/%s/full.json" % (PERSON_PREFIX, netid.lower())
-        response = dao.getURL(url, {"Accept": "application/json"})
+        response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
@@ -87,7 +86,7 @@ class PWS(object):
 
         url = "%s.json?%s" % (PERSON_PREFIX,
                               urlencode({"employee_id": employee_id}))
-        response = PWS_DAO().getURL(url, {"Accept": "application/json"})
+        response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
@@ -111,7 +110,7 @@ class PWS(object):
 
         url = "%s.json?%s" % (PERSON_PREFIX,
                               urlencode({"student_number": student_number}))
-        response = PWS_DAO().getURL(url, {"Accept": "application/json"})
+        response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
@@ -133,10 +132,9 @@ class PWS(object):
         if not self.valid_prox_rfid(prox_rfid):
             raise InvalidProxRFID(prox_rfid)
 
-        dao = PWS_DAO()
         url = "%s.json?%s" % (CARD_PREFIX,
                               urlencode({"prox_rfid": prox_rfid}))
-        response = dao.getURL(url, {"Accept": "application/json"})
+        response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
@@ -157,9 +155,8 @@ class PWS(object):
         if not self.valid_uwregid(regid):
             raise InvalidRegID(regid)
 
-        dao = PWS_DAO()
         url = "%s/%s.json" % (ENTITY_PREFIX, regid.upper())
-        response = dao.getURL(url, {"Accept": "application/json"})
+        response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
@@ -175,9 +172,8 @@ class PWS(object):
         if not self.valid_uwnetid(netid):
             raise InvalidNetID(netid)
 
-        dao = PWS_DAO()
         url = "%s/%s.json" % (ENTITY_PREFIX, netid.lower())
-        response = dao.getURL(url, {"Accept": "application/json"})
+        response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
@@ -191,9 +187,8 @@ class PWS(object):
         if not self.valid_uwregid(regid):
             raise InvalidRegID(regid)
 
-        dao = PWS_DAO()
         url = "%s/%s/full.json" % (PERSON_PREFIX, regid.upper())
-        response = dao.getURL(url, {"Accept": "application/json"})
+        response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status == 404:
             return
@@ -228,7 +223,7 @@ class PWS(object):
                 raise InvalidNetID(self.actas)
             headers["X-UW-Act-as"] = self.actas
 
-        response = PWS_DAO().getURL(url, headers)
+        response = DAO.getURL(url, headers)
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
@@ -259,81 +254,7 @@ class PWS(object):
         Internal method, for creating the Person object.
         """
         person_data = json.loads(data)
-        person = Person()
-        person.uwnetid = person_data["UWNetID"]
-        person.uwregid = person_data["UWRegID"]
-
-        person.whitepages_publish = person_data["WhitepagesPublish"]
-        person.surname = person_data["RegisteredSurname"]
-        person.first_name = person_data["RegisteredFirstMiddleName"]
-        person.full_name = person_data["RegisteredName"]
-        person.display_name = person_data["DisplayName"]
-
-        person_affiliations = person_data.get('PersonAffiliations')
-        if person_affiliations is not None:
-            student_affiliations = (person_affiliations
-                                    .get('StudentPersonAffiliation'))
-            if student_affiliations is not None:
-                person.student_number = (student_affiliations
-                                         .get('StudentNumber'))
-                person.student_system_key = (student_affiliations
-                                             .get('StudentSystemKey'))
-            employee_affiliations = (person_affiliations
-                                     .get('EmployeePersonAffiliation'))
-            if employee_affiliations is not None:
-                person.employee_id = (employee_affiliations
-                                      .get('EmployeeID'))
-
-        for affiliation in person_data["EduPersonAffiliations"]:
-            if affiliation == "student":
-                person.is_student = True
-            elif affiliation == "alum":
-                person.is_alum = True
-            elif affiliation == "staff":
-                person.is_staff = True
-            elif affiliation == "faculty":
-                person.is_faculty = True
-            elif affiliation == "employee":
-                person.is_employee = True
-
-        affiliations = person_data["PersonAffiliations"]
-        if "EmployeePersonAffiliation" in affiliations:
-            employee = affiliations["EmployeePersonAffiliation"]
-            person.mailstop = employee["MailStop"]
-            person.home_department = employee["HomeDepartment"]
-            white_pages = employee["EmployeeWhitePages"]
-            person.publish_in_emp_directory = white_pages["PublishInDirectory"]
-
-            if person.publish_in_emp_directory:
-                person.email1 = white_pages["Email1"]
-                person.email2 = white_pages["Email2"]
-                person.phone1 = white_pages["Phone1"]
-                person.phone2 = white_pages["Phone2"]
-                person.title1 = white_pages["Title1"]
-                person.title2 = white_pages["Title2"]
-                person.voicemail = white_pages["VoiceMail"]
-                person.fax = white_pages["Fax"]
-                person.touchdial = white_pages["TouchDial"]
-                person.address1 = white_pages["Address1"]
-                person.address2 = white_pages["Address2"]
-                person.department1 = white_pages["Department1"]
-                person.department2 = white_pages["Department2"]
-
-        if "StudentPersonAffiliation" in affiliations and person.is_student:
-            student = affiliations["StudentPersonAffiliation"]
-            if "StudentWhitePages" in student:
-                white_pages = student["StudentWhitePages"]
-                if "Class" in white_pages:
-                    person.student_class = white_pages["Class"]
-                if "Department1" in white_pages:
-                    person.student_department1 = (white_pages
-                                                  .get('Department1'))
-                if "Department2" in white_pages:
-                    person.student_department2 = (white_pages
-                                                  .get('Department2'))
-                if "Department3" in white_pages:
-                    person.student_department3 = (white_pages
-                                                  .get('Department3'))
+        person = Person.from_json(person_data)
 
         return person
 
