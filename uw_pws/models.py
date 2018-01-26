@@ -23,11 +23,11 @@ class Person(models.Model):
                                           null=True, default=None)
     employee_id = models.CharField(max_length=9, null=True, default=None)
 
-    is_student = models.NullBooleanField()
-    is_staff = models.NullBooleanField()
-    is_employee = models.NullBooleanField()
-    is_alum = models.NullBooleanField()
-    is_faculty = models.NullBooleanField()
+    is_student = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_employee = models.BooleanField(default=False)
+    is_alum = models.BooleanField(default=False)
+    is_faculty = models.BooleanField(default=False)
 
     email1 = models.CharField(max_length=255, null=True, default=None)
     email2 = models.CharField(max_length=255, null=True, default=None)

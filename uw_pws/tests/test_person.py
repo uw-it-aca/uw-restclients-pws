@@ -127,7 +127,7 @@ class PWSTestPersonData(TestCase):
         self.assertEquals(person1.is_student, True)
         self.assertEquals(person1.is_alum, True)
         self.assertEquals(person1.is_staff, True)
-        self.assertEquals(person1.is_faculty, None)
+        self.assertEquals(person1.is_faculty, False)
         self.assertEquals(person1.is_employee, True)
 
         self.assertEquals(person1.mailstop, None, "MailStop")
@@ -143,7 +143,7 @@ class PWSTestPersonData(TestCase):
         self.assertEquals(person2.is_student, True)
         self.assertEquals(person2.is_alum, True)
         self.assertEquals(person2.is_staff, True)
-        self.assertEquals(person2.is_faculty, None)
+        self.assertEquals(person2.is_faculty, False)
         self.assertEquals(person2.is_employee, True)
 
         self.assertEquals(person2.home_department, "C&C TEST BUDGET",
