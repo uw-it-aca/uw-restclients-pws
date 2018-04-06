@@ -264,5 +264,6 @@ class PWS(object):
         entity.uwnetid = entity_data["UWNetID"]
         entity.uwregid = entity_data["UWRegID"]
         entity.display_name = entity_data["DisplayName"]
-
+        entity.prior_uwnetids = entity_data.get("PriorUWNetIDs", [])
+        entity.prior_uwregids = entity_data.get("PriorUWRegIDs", [])
         return entity
