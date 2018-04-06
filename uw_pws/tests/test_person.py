@@ -18,6 +18,15 @@ class PWSTestPersonData(TestCase):
         # Valid data, shouldn't throw exceptions
         self._test_netid('javerage', '9136CCB8F66711D5BE060004AC494FFE')
 
+    def test_prior_ids(self):
+        pws = PWS()
+        person = pws.get_person_by_netid('javerage')
+        self.assertEquals(len(person.prior_uwnetids), 1)
+        self.assertEquals(person.prior_uwnetids[0], 'javerag')
+        self.assertEquals(len(person.prior_uwregids), 1)
+        self.assertEquals(person.prior_uwregids[0],
+                          "9136CCB8F66711D5BE060004AC494FF0")
+
     def test_by_employeeid(self):
         pws = PWS()
         person = pws.get_person_by_employee_id('123456789')
@@ -129,7 +138,7 @@ class PWSTestPersonData(TestCase):
         self.assertEquals(person1.is_student, True)
         self.assertEquals(person1.is_alum, True)
         self.assertEquals(person1.is_staff, True)
-        self.assertEquals(person1.is_faculty, None)
+        self.assertEquals(person1.is_faculty, False)
         self.assertEquals(person1.is_employee, True)
 
         self.assertEquals(person1.mailstop, None, "MailStop")
@@ -145,7 +154,7 @@ class PWSTestPersonData(TestCase):
         self.assertEquals(person2.is_student, True)
         self.assertEquals(person2.is_alum, True)
         self.assertEquals(person2.is_staff, True)
-        self.assertEquals(person2.is_faculty, None)
+        self.assertEquals(person2.is_faculty, False)
         self.assertEquals(person2.is_employee, True)
 
         self.assertEquals(person2.home_department, "C&C TEST BUDGET",
