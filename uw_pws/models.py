@@ -106,6 +106,14 @@ class Person(models.Model):
         person.uwnetid = person_data["UWNetID"]
         person.uwregid = person_data["UWRegID"]
 
+        person.prior_uwnetid = []
+        for id in person_data.get("PriorUWNetIDs"):
+            person.prior_uwnetid.append(id)
+
+        person.prior_uwregid = []
+        for id in person_data.get("PriorUWRegIDs"):
+            person.prior_uwregid.append(id)
+
         person.whitepages_publish = person_data["WhitepagesPublish"]
         person.surname = person_data["RegisteredSurname"]
         person.first_name = person_data["RegisteredFirstMiddleName"]
