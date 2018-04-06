@@ -54,6 +54,8 @@ class PWSTestEntityData(TestCase):
 
         self.assertEquals(entity.uwnetid, netid, netid + "'s netid")
         self.assertEquals(entity.uwregid, regid, netid + "'s regid")
+        self.assertEquals(len(entity.prior_uwnetids), 0)
+        self.assertEquals(len(entity.prior_uwregids), 0)
 
     def _test_netid(self, netid, regid):
         pws = PWS()
@@ -61,3 +63,5 @@ class PWSTestEntityData(TestCase):
 
         self.assertEquals(entity.uwnetid, netid, netid + "'s netid")
         self.assertEquals(entity.uwregid, regid, netid + "'s regid")
+        self.assertEquals(len(entity.prior_uwnetids), 0)
+        self.assertEquals(len(entity.prior_uwregids), 0)
