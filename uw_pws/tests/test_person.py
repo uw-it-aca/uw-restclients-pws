@@ -21,10 +21,10 @@ class PWSTestPersonData(TestCase):
     def test_prior_ids(self):
         pws = PWS()
         person = pws.get_person_by_netid('javerage')
-        self.assertEquals(len(person.prior_uwnetid), 1)
-        self.assertEquals(person.prior_uwnetid[0], 'javerag')
-        self.assertEquals(len(person.prior_uwregid), 1)
-        self.assertEquals(person.prior_uwregid[0],
+        self.assertEquals(len(person.prior_uwnetids), 1)
+        self.assertEquals(person.prior_uwnetids[0], 'javerag')
+        self.assertEquals(len(person.prior_uwregids), 1)
+        self.assertEquals(person.prior_uwregids[0],
                           "9136CCB8F66711D5BE060004AC494FF0")
 
     def test_by_employeeid(self):
