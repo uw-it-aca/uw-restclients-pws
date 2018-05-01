@@ -39,7 +39,7 @@ class IdCardTestPhoto(TestCase):
         img = pws.get_idcard_photo(person.uwregid)
         try:
             self.assertEquals(img.len, 4661, "Correct file for default size")
-        except:
+        except Exception:
             size = img.getbuffer().nbytes
             self.assertEquals(size, 4661, "Correct file for default size")
 

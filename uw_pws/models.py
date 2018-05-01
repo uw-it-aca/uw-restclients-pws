@@ -17,7 +17,9 @@ class Person(models.Model):
     surname = models.CharField(max_length=100)
     full_name = models.CharField(max_length=250)
     display_name = models.CharField(max_length=250)
-    preferred_name = models.CharField(max_length=250)
+    preferred_first_name = models.CharField(max_length=250)
+    preferred_middle_name = models.CharField(max_length=250)
+    preferred_surname = models.CharField(max_length=250)
 
     student_number = models.CharField(max_length=9,
                                       null=True, default=None)
@@ -64,7 +66,6 @@ class Person(models.Model):
                 'surname': self.surname,
                 'full_name': self.full_name,
                 'display_name': self.display_name,
-                'preferred_name': self.preferred_name,
                 'whitepages_publish': self.whitepages_publish,
                 'email1': self.email1,
                 'email2': self.email2,
@@ -88,9 +89,6 @@ class Person(models.Model):
         return self.uwregid == other.uwregid
 
     def get_formatted_name(self):
-        if self.preferred_name != "":
-            return self.preferred_name
-
         if ((self.display_name is None or not len(self.display_name) or
              self.display_name.isupper()) and hasattr(self, 'first_name')):
             fullname = HumanName(self.display_name)
@@ -114,26 +112,23 @@ class Person(models.Model):
         person.first_name = person_data["RegisteredFirstMiddleName"]
         person.full_name = person_data["RegisteredName"]
         person.display_name = person_data["DisplayName"]
-
-        if "PreferredName" in person_data:
-            person.preferred_name = person_data["PreferredName"]
-        else:
-            person.preferred_name = ""
+        person.preferred_first_name = person_data.get("PreferredFirstName")
+        person.preferred_middle_name = person_data.get("PreferredMiddleName")
+        person.preferred_surname = person_data.get("PreferredSurname")
 
         person_affiliations = person_data.get('PersonAffiliations')
         if person_affiliations is not None:
-            student_affiliations = (person_affiliations
-                                    .get('StudentPersonAffiliation'))
+            student_affiliations = person_affiliations.get(
+                'StudentPersonAffiliation')
             if student_affiliations is not None:
-                person.student_number = (student_affiliations
-                                         .get('StudentNumber'))
-                person.student_system_key = (student_affiliations
-                                             .get('StudentSystemKey'))
-            employee_affiliations = (person_affiliations
-                                     .get('EmployeePersonAffiliation'))
+                person.student_number = student_affiliations.get(
+                    'StudentNumber')
+                person.student_system_key = student_affiliations.get(
+                    'StudentSystemKey')
+            employee_affiliations = person_affiliations.get(
+                    'EmployeePersonAffiliation')
             if employee_affiliations is not None:
-                person.employee_id = (employee_affiliations
-                                      .get('EmployeeID'))
+                person.employee_id = employee_affiliations.get('EmployeeID')
 
         for affiliation in person_data["EduPersonAffiliations"]:
             if affiliation == "student":
@@ -174,17 +169,10 @@ class Person(models.Model):
             student = affiliations["StudentPersonAffiliation"]
             if "StudentWhitePages" in student:
                 white_pages = student["StudentWhitePages"]
-                if "Class" in white_pages:
-                    person.student_class = white_pages["Class"]
-                if "Department1" in white_pages:
-                    person.student_department1 = (white_pages
-                                                  .get('Department1'))
-                if "Department2" in white_pages:
-                    person.student_department2 = (white_pages
-                                                  .get('Department2'))
-                if "Department3" in white_pages:
-                    person.student_department3 = (white_pages
-                                                  .get('Department3'))
+                person.student_class = white_pages.get("Class")
+                person.student_department1 = white_pages.get('Department1')
+                person.student_department2 = white_pages.get('Department2')
+                person.student_department3 = white_pages.get('Department3')
         return person
 
 
@@ -203,6 +191,16 @@ class Entity(models.Model):
                 'uwregid': self.uwregid,
                 'display_name': self.display_name,
                 }
+
+    @staticmethod
+    def from_json(data):
+        entity = Entity()
+        entity.uwnetid = data["UWNetID"]
+        entity.uwregid = data["UWRegID"]
+        entity.display_name = data["DisplayName"]
+        entity.prior_uwnetids = data.get("PriorUWNetIDs", [])
+        entity.prior_uwregids = data.get("PriorUWRegIDs", [])
+        return entity
 
     def __eq__(self, other):
         return self.uwregid == other.uwregid
