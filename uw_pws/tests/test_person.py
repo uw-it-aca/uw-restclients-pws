@@ -66,11 +66,13 @@ class PWSTestPersonData(TestCase):
         self.assertEquals(person.surname, 'STUDENT')
         self.assertEquals(person.first_name, 'JAMES AVERAGE')
         self.assertEquals(person.full_name, 'JAMES AVERAGE STUDENT')
-        self.assertEquals(person.display_name, 'James Student')
+        self.assertEquals(person.preferred_first_name, 'Jamesy')
+        self.assertEquals(person.preferred_middle_name, '')
+        self.assertEquals(person.preferred_surname, 'McJamesy')
+        self.assertEquals(person.display_name, 'Jamesy McJamesy')
         self.assertEquals(person.student_number, "1033334")
         self.assertEquals(person.employee_id, "123456789")
         self.assertEquals(person.student_class, "Junior")
-        self.assertEquals(person.preferred_name, u"Jamesy McJamesy")
         self.assertEquals(person.get_formatted_name(), "Jamesy McJamesy")
 
     def test_bad_netids(self):
