@@ -19,9 +19,10 @@ import json
 import re
 
 
-PERSON_PREFIX = '/identity/v1/person'
-ENTITY_PREFIX = '/identity/v1/entity'
+PERSON_PREFIX = '/identity/v2/person'
+ENTITY_PREFIX = '/identity/v2/entity'
 CARD_PREFIX = '/idcard/v1/card'
+PHOTO_PREFIX = '/idcard/v1/photo'
 DAO = PWS_DAO()
 
 
@@ -180,24 +181,6 @@ class PWS(object):
 
         return self._entity_from_json(response.data)
 
-    def get_contact(self, regid):
-        """
-        Returns data for the given regid.
-        """
-        if not self.valid_uwregid(regid):
-            raise InvalidRegID(regid)
-
-        url = "%s/%s/full.json" % (PERSON_PREFIX, regid.upper())
-        response = DAO.getURL(url, {"Accept": "application/json"})
-
-        if response.status == 404:
-            return
-
-        if response.status != 200:
-            raise DataFailureException(url, response.status, response.data)
-
-        return json.loads(response.data)
-
     def get_idcard_photo(self, regid, size="medium"):
         """
         Returns a jpeg image, for the passed uwregid. Size is configured as:
@@ -214,7 +197,7 @@ class PWS(object):
                 not re.match(r"[1-9]\d{1,3}$", size)):
             raise InvalidIdCardPhotoSize(size)
 
-        url = "/idcard/v1/photo/%s-%s.jpg" % (regid.upper(), size)
+        url = "%s/%s-%s.jpg" % (PHOTO_PREFIX, regid.upper(), size)
 
         headers = {"Accept": "image/jpeg"}
 
@@ -250,20 +233,9 @@ class PWS(object):
         return True if self._re_prox_rfid.match(str(prox_rfid)) else False
 
     def _person_from_json(self, data):
-        """
-        Internal method, for creating the Person object.
-        """
         person_data = json.loads(data)
-        person = Person.from_json(person_data)
-
-        return person
+        return Person.from_json(person_data)
 
     def _entity_from_json(self, data):
         entity_data = json.loads(data)
-        entity = Entity()
-        entity.uwnetid = entity_data["UWNetID"]
-        entity.uwregid = entity_data["UWRegID"]
-        entity.display_name = entity_data["DisplayName"]
-        entity.prior_uwnetids = entity_data.get("PriorUWNetIDs", [])
-        entity.prior_uwregids = entity_data.get("PriorUWRegIDs", [])
-        return entity
+        return Entity.from_json(entity_data)
