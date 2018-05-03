@@ -181,24 +181,6 @@ class PWS(object):
 
         return self._entity_from_json(response.data)
 
-    def get_contact(self, regid):
-        """
-        Returns data for the given regid.
-        """
-        if not self.valid_uwregid(regid):
-            raise InvalidRegID(regid)
-
-        url = "%s/%s/full.json" % (PERSON_PREFIX, regid.upper())
-        response = DAO.getURL(url, {"Accept": "application/json"})
-
-        if response.status == 404:
-            return
-
-        if response.status != 200:
-            raise DataFailureException(url, response.status, response.data)
-
-        return json.loads(response.data)
-
     def get_idcard_photo(self, regid, size="medium"):
         """
         Returns a jpeg image, for the passed uwregid. Size is configured as:
