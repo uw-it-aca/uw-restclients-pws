@@ -2,7 +2,8 @@ from unittest import TestCase
 from uw_pws.models import Person
 from uw_pws import PWS
 from uw_pws.exceptions import InvalidIdCardPhotoSize
-from restclients_core.exceptions import DataFailureException, InvalidNetID
+from restclients_core.exceptions import (
+    DataFailureException, InvalidNetID, InvalidRegID)
 from uw_pws.util import fdao_pws_override
 
 
@@ -39,9 +40,11 @@ class IdCardTestPhoto(TestCase):
         img = pws.get_idcard_photo(person.uwregid)
         try:
             self.assertEquals(img.len, 4661, "Correct file for default size")
-        except:
+        except Exception:
             size = img.getbuffer().nbytes
             self.assertEquals(size, 4661, "Correct file for default size")
+
+        self.assertRaises(InvalidRegID, pws.get_idcard_photo, "ABC")
 
         # Invalid size param, should throw exceptions
         self.assertRaises(InvalidIdCardPhotoSize, pws.get_idcard_photo,
