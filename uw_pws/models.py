@@ -105,15 +105,15 @@ class Person(models.Model):
             'development_id': self.development_id,
         }
 
-    def get_formatted_name(self):
-        if ((self.display_name is None or not len(self.display_name) or
-             self.display_name.isupper()) and hasattr(self, 'first_name')):
-            fullname = HumanName(self.display_name)
-            fullname.capitalize()
-            fullname.string_format = '{first} {middle} {last}'
-            return str(fullname)
-        else:
+    def get_formatted_name(self, string_format='{first} {middle} {last}'):
+        if (self.display_name is not None and len(self.display_name) and
+                not self.display_name.isupper()):
             return self.display_name
+        else:
+            name = HumanName('%s %s' % (self.first_name, self.surname))
+            name.capitalize()
+            name.string_format = string_format
+            return str(name)
 
     @staticmethod
     def from_json(data):
