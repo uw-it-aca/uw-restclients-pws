@@ -73,7 +73,23 @@ class PWSTestPersonData(TestCase):
         self.assertEquals(person.student_number, "1033334")
         self.assertEquals(person.employee_id, "123456789")
         self.assertEquals(person.student_class, "Junior")
-        self.assertEquals(person.get_formatted_name(), "Jamesy McJamesy")
+
+    def test_formatted_name(self):
+        pws = PWS()
+        person = pws.get_person_by_netid('javerage')
+        self.assertEquals(person.get_formatted_name(), person.display_name)
+
+        person.display_name = 'JAMES AVERAGE STUDENT'
+        self.assertEquals(person.get_formatted_name(), "James Average Student")
+
+        person.display_name = ''
+        self.assertEquals(person.get_formatted_name(), "James Average Student")
+
+        person.display_name = None
+        self.assertEquals(person.get_formatted_name(), "James Average Student")
+        self.assertEquals(
+            person.get_formatted_name(string_format='{first} {last}'),
+            "James Student")
 
     def test_bad_netids(self):
         # Invalid data, should throw exceptions
