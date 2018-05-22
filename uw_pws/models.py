@@ -75,6 +75,12 @@ class Person(models.Model):
     def __eq__(self, other):
         return self.uwregid == other.uwregid
 
+    def get_primary_position(self):
+        for position in self.positions:
+            if position.is_primary:
+                return position
+        return None
+
     def json_data(self):
         return {
             'uwnetid': self.uwnetid,

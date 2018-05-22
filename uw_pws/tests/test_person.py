@@ -203,6 +203,7 @@ class PWSTestPersonData(TestCase):
         self.assertTrue(data.get('home_department'))
         self.assertTrue(data.get('publish_in_emp_directory'))
         self.assertTrue('positions' in data)
+        self.assertEqual(person.get_primary_position().title, u'Lab Manager')
         self.assertTrue('email_addresses' in data)
         self.assertTrue('faxes' in data)
         self.assertTrue('phones' in data)
