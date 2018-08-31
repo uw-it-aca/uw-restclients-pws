@@ -32,12 +32,10 @@ class PWS(object):
     """
     def __init__(self, actas=None):
         self.actas = actas
+        # netid format:
+        #     https://wiki.cac.washington.edu/display/SMW/UW+NetID+Namespace
+        self._re_netid = re.compile(r'^[a-z][a-z0-9\-\_\.]{,127}$', re.I)
         self._re_regid = re.compile(r'^[A-F0-9]{32}$', re.I)
-        self._re_personal_netid = re.compile(r'^[a-z][_a-z0-9]{0,14}$', re.I)
-        self._re_admin_netid = re.compile(r'^[a-z]adm_[a-z][a-z0-9]{0,14}$',
-                                          re.I)
-        self._re_application_netid = re.compile(r'^a_[a-z0-9\-\_\.$.]{1,18}$',
-                                                re.I)
         self._re_employee_id = re.compile(r'^\d{9}$')
         self._re_student_number = re.compile(r'^\d{7}$')
         self._re_prox_rfid = re.compile(r'^\d{16}$')
@@ -214,10 +212,7 @@ class PWS(object):
         return streamIO(response.data)
 
     def valid_uwnetid(self, netid):
-        uwnetid = str(netid)
-        return (self._re_personal_netid.match(uwnetid) is not None or
-                self._re_admin_netid.match(uwnetid) is not None or
-                self._re_application_netid.match(uwnetid) is not None)
+        return self._re_netid.match(str(netid)) is not None
 
     def valid_uwregid(self, regid):
         return True if self._re_regid.match(str(regid)) else False
