@@ -102,7 +102,7 @@ class PWSTestPersonData(TestCase):
                           pws.get_person_by_netid, "</html>")
         self.assertRaises(InvalidNetID,
                           pws.get_person_by_netid,
-                          "notareal_uwnetid")
+                          "0notareal_uwnetid")
         self.assertRaises(DataFailureException,
                           pws.get_person_by_netid, "hello")
 

@@ -25,7 +25,7 @@ class PWSTestEntityData(TestCase):
         self.assertRaises(InvalidNetID, pws.get_entity_by_netid, "</html>")
         self.assertRaises(InvalidNetID,
                           pws.get_entity_by_netid,
-                          "notareal_uwnetid")
+                          "0notareal_uwnetid")
         self.assertRaises(DataFailureException,
                           pws.get_entity_by_netid, "hello")
 
