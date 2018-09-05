@@ -2,6 +2,10 @@
 This is the interface for interacting with the Person Web Service.
 """
 
+from io import BytesIO as streamIO
+from urllib.parse import urlencode
+import json
+import re
 from restclients_core.exceptions import (InvalidRegID, InvalidNetID,
                                          InvalidEmployeeID,
                                          DataFailureException)
@@ -9,14 +13,6 @@ from uw_pws.exceptions import (InvalidStudentNumber, InvalidIdCardPhotoSize,
                                InvalidProxRFID)
 from uw_pws.dao import PWS_DAO
 from uw_pws.models import Person, Entity
-try:
-    from io import BytesIO as streamIO
-    from urllib.parse import urlencode
-except ImportError:
-    from StringIO import StringIO as streamIO
-    from urllib import urlencode
-import json
-import re
 
 
 PERSON_PREFIX = '/identity/v2/person'

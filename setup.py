@@ -23,8 +23,8 @@ setup(
     author_email="aca-it@uw.edu",
     include_package_data=True,
     install_requires=[
-        'UW-RestClients-Core<1.0',
-        'nameparser>=0.5.6',
+        'UW-RestClients-Core>=1.0,<2.0',
+        'nameparser>=1.0.1,<2.0',
     ],
     license='Apache License, Version 2.0',
     description=('A library for connecting to the Person Web Service at the '
@@ -36,7 +36,6 @@ setup(
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.6',
     ],
 )
