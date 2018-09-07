@@ -23,7 +23,7 @@ setup(
     author_email="aca-it@uw.edu",
     include_package_data=True,
     install_requires=[
-        'UW-RestClients-Core>=1.0,<2.0',
+        'UW-RestClients-Core>1.0,<2.0',
         'nameparser>=1.0.1,<2.0',
     ],
     license='Apache License, Version 2.0',
