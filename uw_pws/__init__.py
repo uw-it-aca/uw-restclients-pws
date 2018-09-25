@@ -59,7 +59,7 @@ class PWS(object):
         netid isn't found, or if there is an error communicating with the PWS,
         a DataFailureException will be thrown.
         """
-        if not self.valid_uwnetid(netid):
+        if netid is None or not self.valid_uwnetid(netid):
             raise InvalidNetID(netid)
 
         url = "%s/%s/full.json" % (PERSON_PREFIX, netid.lower())
@@ -164,7 +164,7 @@ class PWS(object):
         netid isn't found, or if there is an error communicating with the PWS,
         a DataFailureException will be thrown.
         """
-        if not self.valid_uwnetid(netid):
+        if netid is None or not self.valid_uwnetid(netid):
             raise InvalidNetID(netid)
 
         url = "%s/%s.json" % (ENTITY_PREFIX, netid.lower())
