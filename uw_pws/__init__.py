@@ -208,20 +208,25 @@ class PWS(object):
         return streamIO(response.data)
 
     def valid_uwnetid(self, netid):
-        return self._re_netid.match(str(netid)) is not None
+        return (netid is not None and
+                self._re_netid.match(str(netid)) is not None)
 
     def valid_uwregid(self, regid):
-        return True if self._re_regid.match(str(regid)) else False
+        return (regid is not None and
+                self._re_regid.match(str(regid)) is not None)
 
     def valid_employee_id(self, employee_id):
-        return True if self._re_employee_id.match(str(employee_id)) else False
+        return (employee_id is not None and
+                self._re_employee_id.match(str(employee_id)) is not None)
 
     def valid_student_number(self, student_number):
-        return True if (
-            self._re_student_number.match(str(student_number))) else False
+        return (
+            student_number is not None and
+            self._re_student_number.match(str(student_number)) is not None)
 
     def valid_prox_rfid(self, prox_rfid):
-        return True if self._re_prox_rfid.match(str(prox_rfid)) else False
+        return (prox_rfid is not None and
+                self._re_prox_rfid.match(str(prox_rfid)) is not None)
 
     def _person_from_json(self, data):
         person_data = json.loads(data)
