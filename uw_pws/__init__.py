@@ -6,11 +6,10 @@ from io import BytesIO as streamIO
 from urllib.parse import urlencode
 import json
 import re
-from restclients_core.exceptions import (InvalidRegID, InvalidNetID,
-                                         InvalidEmployeeID,
-                                         DataFailureException)
-from uw_pws.exceptions import (InvalidStudentNumber, InvalidIdCardPhotoSize,
-                               InvalidProxRFID)
+from restclients_core.exceptions import (
+    InvalidRegID, InvalidNetID, InvalidEmployeeID, DataFailureException)
+from uw_pws.exceptions import (
+    InvalidStudentNumber, InvalidIdCardPhotoSize, InvalidProxRFID)
 from uw_pws.dao import PWS_DAO
 from uw_pws.models import Person, Entity
 
@@ -45,7 +44,7 @@ class PWS(object):
         if not self.valid_uwregid(regid):
             raise InvalidRegID(regid)
 
-        url = "%s/%s/full.json" % (PERSON_PREFIX, regid.upper())
+        url = "{}/{}/full.json".format(PERSON_PREFIX, regid.upper())
         response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
@@ -62,7 +61,7 @@ class PWS(object):
         if not self.valid_uwnetid(netid):
             raise InvalidNetID(netid)
 
-        url = "%s/%s/full.json" % (PERSON_PREFIX, netid.lower())
+        url = "{}/{}/full.json".format(PERSON_PREFIX, netid.lower())
         response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
@@ -79,8 +78,8 @@ class PWS(object):
         if not self.valid_employee_id(employee_id):
             raise InvalidEmployeeID(employee_id)
 
-        url = "%s.json?%s" % (PERSON_PREFIX,
-                              urlencode({"employee_id": employee_id}))
+        url = "{}.json?{}".format(
+            PERSON_PREFIX, urlencode({"employee_id": employee_id}))
         response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
@@ -103,8 +102,8 @@ class PWS(object):
         if not self.valid_student_number(student_number):
             raise InvalidStudentNumber(student_number)
 
-        url = "%s.json?%s" % (PERSON_PREFIX,
-                              urlencode({"student_number": student_number}))
+        url = "{}.json?{}".format(
+            PERSON_PREFIX, urlencode({"student_number": student_number}))
         response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
@@ -127,8 +126,8 @@ class PWS(object):
         if not self.valid_prox_rfid(prox_rfid):
             raise InvalidProxRFID(prox_rfid)
 
-        url = "%s.json?%s" % (CARD_PREFIX,
-                              urlencode({"prox_rfid": prox_rfid}))
+        url = "{}.json?{}".format(
+            CARD_PREFIX, urlencode({"prox_rfid": prox_rfid}))
         response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
@@ -150,7 +149,7 @@ class PWS(object):
         if not self.valid_uwregid(regid):
             raise InvalidRegID(regid)
 
-        url = "%s/%s.json" % (ENTITY_PREFIX, regid.upper())
+        url = "{}/{}.json".format(ENTITY_PREFIX, regid.upper())
         response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
@@ -167,7 +166,7 @@ class PWS(object):
         if not self.valid_uwnetid(netid):
             raise InvalidNetID(netid)
 
-        url = "%s/%s.json" % (ENTITY_PREFIX, netid.lower())
+        url = "{}/{}.json".format(ENTITY_PREFIX, netid.lower())
         response = DAO.getURL(url, {"Accept": "application/json"})
 
         if response.status != 200:
@@ -191,7 +190,7 @@ class PWS(object):
                 not re.match(r"[1-9]\d{1,3}$", size)):
             raise InvalidIdCardPhotoSize(size)
 
-        url = "%s/%s-%s.jpg" % (PHOTO_PREFIX, regid.upper(), size)
+        url = "{}/{}-{}.jpg".format(PHOTO_PREFIX, regid.upper(), size)
 
         headers = {"Accept": "image/jpeg"}
 
