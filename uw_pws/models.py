@@ -116,7 +116,7 @@ class Person(models.Model):
                 not self.display_name.isupper()):
             return self.display_name
         else:
-            name = HumanName('%s %s' % (self.first_name, self.surname))
+            name = HumanName("{} {}".format(self.first_name, self.surname))
             name.capitalize()
             name.string_format = string_format
             return str(name)
