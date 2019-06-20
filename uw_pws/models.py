@@ -41,6 +41,7 @@ class Person(models.Model):
     is_employee = models.BooleanField(default=False)
     is_alum = models.BooleanField(default=False)
     is_faculty = models.BooleanField(default=False)
+    is_test_entity = models.BooleanField(default=False)
 
     # Employee attributes
     employee_id = models.CharField(max_length=9, default=None)
@@ -85,6 +86,7 @@ class Person(models.Model):
         return {
             'uwnetid': self.uwnetid,
             'uwregid': self.uwregid,
+            'is_test_entity': self.is_test_entity,
             'first_name': self.first_name,
             'surname': self.surname,
             'full_name': self.full_name,
@@ -126,6 +128,7 @@ class Person(models.Model):
         person = Person()
         person.uwnetid = data.get("UWNetID")
         person.uwregid = data.get("UWRegID")
+        person.is_test_entity = data.get("IsTestEntity")
         person.prior_uwnetids = data.get("PriorUWNetIDs", [])
         person.prior_uwregids = data.get("PriorUWRegIDs", [])
         person.whitepages_publish = data.get("WhitepagesPublish")

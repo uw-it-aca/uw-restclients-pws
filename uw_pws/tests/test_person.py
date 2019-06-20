@@ -1,3 +1,4 @@
+import logging
 from unittest import TestCase
 from uw_pws import PWS
 from restclients_core.exceptions import (InvalidRegID, InvalidNetID,
@@ -209,3 +210,36 @@ class PWSTestPersonData(TestCase):
         self.assertTrue('phones' in data)
         self.assertEqual(person.display_name, "BILL AVERAGE TEACHER")
         self.assertEqual(person.get_formatted_name(), "Bill Average Teacher")
+        self.assertEqual(
+            person.json_data(),
+            {'uwnetid': 'bill',
+             'uwregid': 'FBB38FE46A7C11D5A4AE0004AC494FFE',
+             'is_test_entity': False,
+             'first_name': 'Bill Average',
+             'surname': 'Teacher',
+             'full_name': 'Bill Average Teacher',
+             'display_name': 'BILL AVERAGE TEACHER',
+             'whitepages_publish': True,
+             'employee_id': '111111111',
+             'addresses': [],
+             'email_addresses': [],
+             'faxes': [],
+             'mobiles': [],
+             'pagers': [],
+             'phones': [],
+             'voice_mails': [],
+             'touch_dials': [],
+             'positions': [
+                 {'department': 'ENG: Materials Science and Engineering',
+                  'title': 'Lab Manager',
+                  'is_primary': True}],
+             'mailstop': '123400',
+             'home_department': 'ENG: Materials Science and Engineering',
+             'publish_in_emp_directory': True,
+             'student_number': '0111111',
+             'student_system_key': '000111111',
+             'student_class': None,
+             'student_departments': [],
+             'publish_in_stu_directory': False,
+             'development_id': '0000111111'})
+        self.assertIsNotNone(str(person))
