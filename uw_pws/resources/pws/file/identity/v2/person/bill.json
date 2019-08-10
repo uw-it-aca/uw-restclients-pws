@@ -1,1 +1,55 @@
-{"DisplayName":"BILL AVERAGE TEACHER","EduPersonAffiliations":["member","alum","staff","employee"],"IsTestEntity":true,"PriorUWNetIDs":[],"PriorUWRegIDs":[],"RegisteredFirstMiddleName":"BILL AVERAGE","RegisteredName":"BILL AVERAGE TEACHER","RegisteredSurname":"TEACHER","UIDNumber":"14129","UWNetID":"bill","UWRegID":"FBB38FE46A7C11D5A4AE0004AC494FFE","WhitepagesPublish":true,"PersonAffiliations":{"PersonFullURI":{"DisplayName":"BILL AVERAGE TEACHER","Href":"\/identity\/v1\/person\/FBB38FE46A7C11D5A4AE0004AC494FFE\/full.json","UWNetID":"bill","UWRegID":"FBB38FE46A7C11D5A4AE0004AC494FFE"}}}
+{
+"PreferredSurname": null,
+ "WhitepagesPublish": true,
+"DisplayName": "BILL AVERAGE TEACHER",
+"UIDNumber": "11111",
+"RegisteredFirstMiddleName": "Bill Average",
+"PreferredMiddleName": null,
+"PreferredFirstName": null,
+"UWRegID": "FBB38FE46A7C11D5A4AE0004AC494FFE",
+"RegisteredName": "Bill Average Teacher",
+"IsTestEntity": false,
+"RegisteredSurname": "Teacher",
+"EduPersonAffiliations": ["member",
+                          "alum",
+                          "faculty",
+                          "staff",
+                          "employee"],
+"PriorUWRegIDs": [],
+"PersonAffiliations": {
+    "StudentPersonAffiliation": {
+        "StudentNumber": "0111111",
+        "StudentSystemKey": "000111111",
+        "StudentAffiliationState":"prior",
+        "StudentWhitePages": {
+            "Name": "BILL AVERAGE TEACHER",
+            "Phone":null,
+            "Email":null,
+            "PublishInDirectory":false,
+            "Class":null,
+            "Departments":[]}},
+"AlumPersonAffiliation": {
+    "DevelopmentID": "0000111111",
+    "AlumAffiliationState":"current"},
+"EmployeePersonAffiliation": {
+    "EmployeeAffiliationState": "current",
+    "EmployeeWhitePages": {
+        "Name": "BILL AVERAGE TEACHER",
+        "Positions": [
+            {"EWPDept": "ENG: Materials Science and Engineering",
+             "EWPTitle": "Lab Manager",
+             "Primary": true}],
+        "VoiceMails": [],
+        "EmailAddresses": [],
+        "PublishInDirectory": true,
+        "Pagers": [],
+        "Faxes": [],
+        "Addresses": [],
+        "Phones": [],
+        "Mobiles": []},
+    "MailStop": "123400",
+    "EmployeeID": "111111111",
+    "HomeDepartment": "ENG: Materials Science and Engineering"}},
+"RepositoryTimeStamp": "05/02/2018 04:00:57 PM",
+"PriorUWNetIDs": [],
+ "UWNetID": "bill"}

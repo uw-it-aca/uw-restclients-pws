@@ -159,6 +159,10 @@ class PWSTestPersonData(TestCase):
         self.assertEquals(person1.is_staff, True)
         self.assertEquals(person1.is_faculty, False)
         self.assertEquals(person1.is_employee, True)
+        self.assertEquals(person1.student_state, "current")
+        self.assertFalse(person1.is_former_alumni())
+        self.assertFalse(person1.is_former_employee())
+        self.assertFalse(person1.is_former_student())
 
         self.assertEquals(person1.mailstop, None, "MailStop")
         self.assertEquals(person1.home_department, "C&C TEST BUDGET",
@@ -210,6 +214,11 @@ class PWSTestPersonData(TestCase):
         self.assertTrue('phones' in data)
         self.assertEqual(person.display_name, "BILL AVERAGE TEACHER")
         self.assertEqual(person.get_formatted_name(), "Bill Average Teacher")
+        self.assertEquals(person.employee_state, "current")
+        self.assertFalse(person.is_former_alumni())
+        self.assertFalse(person.is_former_employee())
+        self.assertTrue(person.is_former_student())
+        print(person.json_data())
         self.assertEqual(
             person.json_data(),
             {'uwnetid': 'bill',
@@ -228,7 +237,7 @@ class PWSTestPersonData(TestCase):
              'pagers': [],
              'phones': [],
              'voice_mails': [],
-             'touch_dials': [],
+             'touch_dials': None,
              'positions': [
                  {'department': 'ENG: Materials Science and Engineering',
                   'title': 'Lab Manager',
@@ -241,5 +250,8 @@ class PWSTestPersonData(TestCase):
              'student_class': None,
              'student_departments': [],
              'publish_in_stu_directory': False,
-             'development_id': '0000111111'})
+             'development_id': '0000111111',
+             'is_former_alumni': False,
+             'is_former_employee': False,
+             'is_former_student': True})
         self.assertIsNotNone(str(person))

@@ -1,1 +1,55 @@
-{"PreferredSurname": null, "WhitepagesPublish": true, "DisplayName": "BILL AVERAGE TEACHER", "UIDNumber": "35343", "RegisteredFirstMiddleName": "BILL AVERAGE", "PreferredMiddleName": null, "PreferredFirstName": null, "UWRegID": "FBB38FE46A7C11D5A4AE0004AC494FFE", "RegisteredName": "BILL AVERAGE TEACHER", "IsTestEntity": false, "RegisteredSurname": "TEACHER", "EduPersonAffiliations": ["member", "alum", "staff", "employee"], "PriorUWRegIDs": [], "PersonAffiliations": {"AlumPersonAffiliation": {"DevelopmentID": "0000995897"}, "EmployeePersonAffiliation": {"EmployeeWhitePages": {"TouchDials": [], "Name": "BILL AVERAGE TEACHER", "Positions": [{"EWPDept": "UW-IT", "EWPTitle": "Associate Professor", "Primary": true}], "VoiceMails": ["425-555-1237"], "EmailAddresses": ["bill@u.washington.edu"], "PublishInDirectory": true, "Pagers": [], "Faxes": ["206 555-1234"], "Addresses": ["4518 University Way NE Seattle, WA 98105"], "Phones": ["206 555-1235", "425 555-1236"], "Mobiles": []}, "MailStop": "354744", "EmployeeID": "123456781", "HomeDepartment": "OVP OF UW IT"}}, "RepositoryTimeStamp": "05/02/2018 04:20:58 PM", "PriorUWNetIDs": [], "UWNetID": "bill"}
+{
+"PreferredSurname": null,
+ "WhitepagesPublish": true,
+"DisplayName": "BILL AVERAGE TEACHER",
+"UIDNumber": "11111",
+"RegisteredFirstMiddleName": "Bill Average",
+"PreferredMiddleName": null,
+"PreferredFirstName": null,
+"UWRegID": "FBB38FE46A7C11D5A4AE0004AC494FFE",
+"RegisteredName": "Bill Average Teacher",
+"IsTestEntity": false,
+"RegisteredSurname": "Teacher",
+"EduPersonAffiliations": ["member",
+                          "alum",
+                          "faculty",
+                          "staff",
+                          "employee"],
+"PriorUWRegIDs": [],
+"PersonAffiliations": {
+    "StudentPersonAffiliation": {
+        "StudentNumber": "0111111",
+        "StudentSystemKey": "000111111",
+        "StudentAffiliationState":"prior",
+        "StudentWhitePages": {
+            "Name": "BILL AVERAGE TEACHER",
+            "Phone":null,
+            "Email":null,
+            "PublishInDirectory":false,
+            "Class":null,
+            "Departments":[]}},
+"AlumPersonAffiliation": {
+    "DevelopmentID": "0000111111",
+    "AlumAffiliationState":"current"},
+"EmployeePersonAffiliation": {
+    "EmployeeAffiliationState": "current",
+    "EmployeeWhitePages": {
+        "Name": "BILL AVERAGE TEACHER",
+        "Positions": [
+            {"EWPDept": "ENG: Materials Science and Engineering",
+             "EWPTitle": "Lab Manager",
+             "Primary": true}],
+        "VoiceMails": [],
+        "EmailAddresses": [],
+        "PublishInDirectory": true,
+        "Pagers": [],
+        "Faxes": [],
+        "Addresses": [],
+        "Phones": [],
+        "Mobiles": []},
+    "MailStop": "123400",
+    "EmployeeID": "111111111",
+    "HomeDepartment": "ENG: Materials Science and Engineering"}},
+"RepositoryTimeStamp": "05/02/2018 04:00:57 PM",
+"PriorUWNetIDs": [],
+ "UWNetID": "bill"}
