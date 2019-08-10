@@ -126,23 +126,32 @@ class TestModels(TestCase):
              'student_state': 'prior'})
         self.assertIsNotNone(str(person))
 
-        self.assertFalse(person.is_former_alumni())
+        self.assertTrue(person.is_alum_state_current())
+        self.assertFalse(person.is_alum_state_prior())
         person.alumni_state = "prior"
-        self.assertTrue(person.is_former_alumni())
+        self.assertTrue(person.is_alum_state_prior())
+        self.assertFalse(person.is_alum_state_current())
         person.alumni_state = None
-        self.assertFalse(person.is_former_alumni())
+        self.assertFalse(person.is_alum_state_prior())
+        self.assertFalse(person.is_alum_state_current())
 
-        self.assertFalse(person.is_former_employee())
+        self.assertTrue(person.is_emp_state_current())
+        self.assertFalse(person.is_emp_state_prior())
         person.employee_state = "prior"
-        self.assertTrue(person.is_former_employee())
+        self.assertTrue(person.is_emp_state_prior())
+        self.assertFalse(person.is_emp_state_current())
         person.employee_state = None
-        self.assertFalse(person.is_former_employee())
+        self.assertFalse(person.is_emp_state_prior())
+        self.assertFalse(person.is_emp_state_current())
 
-        self.assertTrue(person.is_former_student())
+        self.assertFalse(person.is_stud_state_current())
+        self.assertTrue(person.is_stud_state_prior())
         person.student_state = None
-        self.assertFalse(person.is_former_student())
+        self.assertFalse(person.is_stud_state_prior())
+        self.assertFalse(person.is_stud_state_current())
         person.student_state = "current"
-        self.assertFalse(person.is_former_student())
+        self.assertFalse(person.is_stud_state_prior())
+        self.assertTrue(person.is_stud_state_current())
 
         self.assertFalse(person.is_retiree())
         person.positions = []

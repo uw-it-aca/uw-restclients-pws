@@ -29,6 +29,7 @@ class Position(models.Model):
 
 
 class Person(models.Model):
+    CURRENT = "current"
     PRIOR = "prior"
 
     uwregid = models.CharField(max_length=32)
@@ -92,15 +93,28 @@ class Person(models.Model):
                 return position
         return None
 
-    def is_former_alumni(self):
+    def is_alum_state_current(self):
+        return (self.alumni_state is not None and
+                self.alumni_state == Person.CURRENT)
+
+    def is_emp_state_current(self):
+        # this include retiree
+        return (self.employee_state is not None and
+                self.employee_state == Person.CURRENT)
+
+    def is_stud_state_current(self):
+        return (self.student_state is not None and
+                self.student_state == Person.CURRENT)
+
+    def is_alum_state_prior(self):
         return (self.alumni_state is not None and
                 self.alumni_state == Person.PRIOR)
 
-    def is_former_employee(self):
+    def is_emp_state_prior(self):
         return (self.employee_state is not None and
                 self.employee_state == Person.PRIOR)
 
-    def is_former_student(self):
+    def is_stud_state_prior(self):
         return (self.student_state is not None and
                 self.student_state == Person.PRIOR)
 

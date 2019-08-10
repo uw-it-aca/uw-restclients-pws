@@ -160,9 +160,9 @@ class PWSTestPersonData(TestCase):
         self.assertEquals(person1.is_faculty, False)
         self.assertEquals(person1.is_employee, True)
         self.assertEquals(person1.student_state, "current")
-        self.assertFalse(person1.is_former_alumni())
-        self.assertFalse(person1.is_former_employee())
-        self.assertFalse(person1.is_former_student())
+        self.assertTrue(person1.is_alum_state_current())
+        self.assertTrue(person1.is_emp_state_current())
+        self.assertTrue(person1.is_stud_state_current())
 
         self.assertEquals(person1.mailstop, '359540', "MailStop")
         self.assertEquals(person1.home_department, "Computer Science",
