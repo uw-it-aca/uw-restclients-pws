@@ -7,16 +7,15 @@ class TestModels(TestCase):
 
     def test_position(self):
         pos = Position.from_json({
-            "EWPDept":"University of Washington",
-            "EWPTitle":"Retiree",
-            "Primary":True})
+            "EWPDept": "University of Washington",
+            "EWPTitle": "Retiree",
+            "Primary": True})
         self.assertEquals(
             pos.json_data(),
             {'department': "University of Washington",
              'title': "Retiree",
              'is_primary': True})
         self.assertTrue(pos.is_retiree())
-
 
     def test_person(self):
         person = Person.from_json(
@@ -43,7 +42,7 @@ class TestModels(TestCase):
                  "StudentPersonAffiliation": {
                      "StudentNumber": "0111111",
                      "StudentSystemKey": "000111111",
-                     "StudentAffiliationState":"prior",
+                     "StudentAffiliationState": "prior",
                      "StudentWhitePages": {
                          "Name": "Teacher, Bill",
                          "Phone":None,
@@ -53,17 +52,17 @@ class TestModels(TestCase):
                          "Departments":[]}},
                  "AlumPersonAffiliation": {
                      "DevelopmentID": "0000111111",
-                     "AlumAffiliationState":"current"},
+                     "AlumAffiliationState": "current"},
                  "EmployeePersonAffiliation": {
                      "EmployeeAffiliationState": "current",
                      "EmployeeWhitePages": {
                          "Name": "Teacher, Bill",
                          "Positions": [
-                             {"EWPDept":"Family Medicine",
-                              "EWPTitle":"Associate Professor",
+                             {"EWPDept": "Family Medicine",
+                              "EWPTitle": "Associate Professor",
                               "Primary":True},
-                             {"EWPDept":"Family Medicine",
-                              "EWPTitle":"Associate Professor - Non Salaried",
+                             {"EWPDept": "Family Medicine",
+                              "EWPTitle": "Associate Professor - Non Salaried",
                               "Primary":False}],
                          "VoiceMails": ["+1 425 222-2222"],
                          "EmailAddresses": ["bill@uw.edu"],
@@ -109,9 +108,9 @@ class TestModels(TestCase):
                  {'department': 'Family Medicine',
                   'is_primary': True,
                   'title': 'Associate Professor'},
-                 {'department':'Family Medicine',
+                 {'department': 'Family Medicine',
                   'is_primary':False,
-                  'title':'Associate Professor - Non Salaried'},
+                  'title': 'Associate Professor - Non Salaried'},
              ],
              'mailstop': '354744',
              'home_department': 'Family Medicine',
