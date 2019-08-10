@@ -3,13 +3,14 @@ from restclients_core import models
 
 
 class Position(models.Model):
-    RETIREE = "Retiree"
+    RETIREE = "retiree"
     department = models.CharField(max_length=250)
     title = models.CharField(max_length=250)
     is_primary = models.NullBooleanField()
 
     def is_retiree(self):
-        return self.title == Position.RETIREE
+        return (self.title is not None and
+                self.title.lower() == Position.RETIREE)
 
     def json_data(self):
         return {
@@ -92,16 +93,20 @@ class Person(models.Model):
         return None
 
     def is_former_alumni(self):
-        return self.alumni_state == Person.PRIOR
+        return (self.alumni_state is not None and
+                self.alumni_state == Person.PRIOR)
 
     def is_former_employee(self):
-        return self.employee_state == Person.PRIOR
+        return (self.employee_state is not None and
+                self.employee_state == Person.PRIOR)
 
     def is_former_student(self):
-        return self.student_state == Person.PRIOR
+        return (self.student_state is not None and
+                self.student_state == Person.PRIOR)
 
     def is_retiree(self):
-        return self.get_primary_position().is_retiree()
+        primary_pos = self.get_primary_position()
+        return primary_pos is not None and primary_pos.is_retiree()
 
     def json_data(self):
         return {
