@@ -3,9 +3,13 @@ from restclients_core import models
 
 
 class Position(models.Model):
+    RETIREE = "Retiree"
     department = models.CharField(max_length=250)
     title = models.CharField(max_length=250)
     is_primary = models.NullBooleanField()
+
+    def is_retiree(self):
+        return self.title == Position.RETIREE
 
     def json_data(self):
         return {
@@ -24,7 +28,7 @@ class Position(models.Model):
 
 
 class Person(models.Model):
-    CURRENT = "current"
+    PRIOR = "prior"
 
     uwregid = models.CharField(max_length=32)
     uwnetid = models.SlugField(max_length=16)
@@ -63,15 +67,6 @@ class Person(models.Model):
     development_id = models.CharField(max_length=30, default=None)
     alumni_state = models.CharField(max_length=16, default=None)
 
-    def is_former_alumni(self):
-        return self.alumni_state != Person.CURRENT
-
-    def is_former_employee(self):
-        return self.employee_state != Person.CURRENT
-
-    def is_former_student(self):
-        return self.student_state != Person.CURRENT
-
     def __init__(self, *args, **kwargs):
         super(Person, self).__init__(*args, **kwargs)
         self.prior_uwnetids = []
@@ -95,6 +90,18 @@ class Person(models.Model):
             if position.is_primary:
                 return position
         return None
+
+    def is_former_alumni(self):
+        return self.alumni_state == Person.PRIOR
+
+    def is_former_employee(self):
+        return self.employee_state == Person.PRIOR
+
+    def is_former_student(self):
+        return self.student_state == Person.PRIOR
+
+    def is_retiree(self):
+        return self.get_primary_position().is_retiree()
 
     def json_data(self):
         return {
@@ -125,9 +132,9 @@ class Person(models.Model):
             'student_departments': self.student_departments,
             'publish_in_stu_directory': self.publish_in_stu_directory,
             'development_id': self.development_id,
-            'is_former_alumni': self.is_former_alumni(),
-            'is_former_employee': self.is_former_employee(),
-            'is_former_student': self.is_former_student(),
+            'alumni_state': self.alumni_state,
+            'employee_state': self.employee_state,
+            'student_state': self.student_state
         }
 
     def get_formatted_name(self, string_format='{first} {middle} {last}'):

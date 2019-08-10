@@ -164,13 +164,13 @@ class PWSTestPersonData(TestCase):
         self.assertFalse(person1.is_former_employee())
         self.assertFalse(person1.is_former_student())
 
-        self.assertEquals(person1.mailstop, None, "MailStop")
-        self.assertEquals(person1.home_department, "C&C TEST BUDGET",
+        self.assertEquals(person1.mailstop, '359540', "MailStop")
+        self.assertEquals(person1.home_department, "Computer Science",
                           "HomeDepartment")
         self.assertEquals(person1.student_number, "1033334")
         self.assertEquals(person1.employee_id, "123456789")
-        self.assertEquals(len(person1.student_departments), 1)
-        self.assertEquals(person1.student_departments[0], "Informatics")
+        self.assertEquals(len(person1.student_departments), 2)
+        self.assertEquals(person1.student_departments[0], "Computer Science")
 
         person2 = pws.get_person_by_netid("finals1")
         self.assertEquals(person2.is_student, True)
@@ -203,55 +203,5 @@ class PWSTestPersonData(TestCase):
     def test_employee_data(self):
         pws = PWS()
         person = pws.get_person_by_netid('bill')
-        data = person.json_data()
-        self.assertTrue(data.get('whitepages_publish'))
-        self.assertTrue(data.get('home_department'))
-        self.assertTrue(data.get('publish_in_emp_directory'))
-        self.assertTrue('positions' in data)
-        self.assertEqual(person.get_primary_position().title, u'Lab Manager')
-        self.assertTrue('email_addresses' in data)
-        self.assertTrue('faxes' in data)
-        self.assertTrue('phones' in data)
-        self.assertEqual(person.display_name, "BILL AVERAGE TEACHER")
-        self.assertEqual(person.get_formatted_name(), "Bill Average Teacher")
-        self.assertEquals(person.employee_state, "current")
-        self.assertFalse(person.is_former_alumni())
-        self.assertFalse(person.is_former_employee())
-        self.assertTrue(person.is_former_student())
-        print(person.json_data())
-        self.assertEqual(
-            person.json_data(),
-            {'uwnetid': 'bill',
-             'uwregid': 'FBB38FE46A7C11D5A4AE0004AC494FFE',
-             'is_test_entity': False,
-             'first_name': 'Bill Average',
-             'surname': 'Teacher',
-             'full_name': 'Bill Average Teacher',
-             'display_name': 'BILL AVERAGE TEACHER',
-             'whitepages_publish': True,
-             'employee_id': '111111111',
-             'addresses': [],
-             'email_addresses': [],
-             'faxes': [],
-             'mobiles': [],
-             'pagers': [],
-             'phones': [],
-             'voice_mails': [],
-             'touch_dials': None,
-             'positions': [
-                 {'department': 'ENG: Materials Science and Engineering',
-                  'title': 'Lab Manager',
-                  'is_primary': True}],
-             'mailstop': '123400',
-             'home_department': 'ENG: Materials Science and Engineering',
-             'publish_in_emp_directory': True,
-             'student_number': '0111111',
-             'student_system_key': '000111111',
-             'student_class': None,
-             'student_departments': [],
-             'publish_in_stu_directory': False,
-             'development_id': '0000111111',
-             'is_former_alumni': False,
-             'is_former_employee': False,
-             'is_former_student': True})
-        self.assertIsNotNone(str(person))
+        self.assertEqual(person.display_name, "Bill Teacher")
+        self.assertEqual(person.get_formatted_name(), "Bill Teacher")
