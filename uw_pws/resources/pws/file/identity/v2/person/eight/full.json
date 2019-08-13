@@ -1,1 +1,60 @@
-{"PreferredSurname": null, "WhitepagesPublish": false, "DisplayName": "EIGHT CLASS STUDENT", "UIDNumber": "97802", "RegisteredFirstMiddleName": "EIGHT CLASS", "PreferredMiddleName": null, "PreferredFirstName": null, "UWRegID": "12345678901234567890123456789012", "RegisteredName": "EIGHT CLASS STUDENT", "IsTestEntity": true, "RegisteredSurname": "STUDENT", "EduPersonAffiliations": ["member", "student", "alum", "staff", "employee"], "PriorUWRegIDs": [], "PersonAffiliations": {"StudentPersonAffiliation": {"StudentNumber": "1443336", "StudentSystemKey": "000083857", "StudentWhitePages": {"Name": "EIGHT CLASS STUDENT", "Departments": [], "Email": null, "Phone": null, "PublishInDirectory": false, "Class": null}}, "AlumPersonAffiliation": {"DevelopmentID": "0000773877"}, "EmployeePersonAffiliation": {"EmployeeWhitePages": {"TouchDials": [], "Name": "EIGHT CLASS STUDENT", "Positions": [], "VoiceMails": [], "EmailAddresses": [], "PublishInDirectory": false, "Pagers": [], "Faxes": [], "Addresses": [], "Phones": [], "Mobiles": []}, "MailStop": null, "EmployeeID": "123456789", "HomeDepartment": "C&C TEST BUDGET"}}, "RepositoryTimeStamp": "05/02/2018 04:16:11 PM", "PriorUWNetIDs": [], "UWNetID": "javerage"}
+{
+"WhitepagesPublish": false,
+"DisplayName": "EIGHT CLASS STUDENT",
+"UIDNumber": "97802",
+"RegisteredFirstMiddleName": "EIGHT CLASS",
+"PreferredMiddleName": null,
+"PreferredFirstName": null,
+"PreferredSurname": null,
+"UWNetID": "eight"
+"UWRegID": "12345678901234567890123456789012",
+"RegisteredName": "EIGHT CLASS STUDENT",
+"RegisteredSurname": "STUDENT",
+"IsTestEntity": true,
+"EduPersonAffiliations": ["member",
+                          "student",
+                          "alum",
+                          "staff",
+                          "employee"],
+"PriorUWNetIDs": [],
+"PriorUWRegIDs": [],
+"PersonAffiliations": {
+    "AlumPersonAffiliation": {
+        "DevelopmentID": "0000773877",
+        "AlumAffiliationState":"current"
+    },
+    "EmployeePersonAffiliation": {
+        "EmployeeAffiliationState":"current",
+        "EmployeeWhitePages": {
+            "TouchDials": [],
+            "Name": "Eight, Student",
+            "Positions": [{"EWPDept":"Statistics JM Student",
+                           "EWPTitle":"Teaching Assistant",
+                           "Primary":true}],
+            "VoiceMails": [],
+            "EmailAddresses": ["eight@uw.edu"],
+            "PublishInDirectory": true,
+            "Pagers": [],
+            "Faxes": [],
+            "Addresses": [],
+            "Phones": ["+1 206 111-1234",
+                       "+1 425 555-1236"],
+            "Mobiles": []},
+        "MailStop": "354322",
+        "EmployeeID": "123456781",
+        "HomeDepartment": "Statistics"}
+    },
+    "StudentPersonAffiliation": {
+        "StudentAffiliationState":"current",
+        "StudentNumber": "1443336",
+        "StudentSystemKey": "000083857",
+        "StudentWhitePages": {
+            "Name": "Eight, Student",
+            "Departments": ["Statistics"],
+            "Email": "eight@uw.edu",
+            "Phone": "+1 206 123-1234",
+            "PublishInDirectory": false,
+            "Class": "Junior"}
+    },
+    "RepositoryTimeStamp": "05/02/2018 04:16:11 PM",
+}

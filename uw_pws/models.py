@@ -3,9 +3,14 @@ from restclients_core import models
 
 
 class Position(models.Model):
+    RETIREE = "retiree"
     department = models.CharField(max_length=250)
     title = models.CharField(max_length=250)
     is_primary = models.NullBooleanField()
+
+    def is_retiree(self):
+        return (self.title is not None and
+                self.title.lower() == Position.RETIREE)
 
     def json_data(self):
         return {
@@ -24,9 +29,11 @@ class Position(models.Model):
 
 
 class Person(models.Model):
+    CURRENT = "current"
+    PRIOR = "prior"
+
     uwregid = models.CharField(max_length=32)
     uwnetid = models.SlugField(max_length=16)
-    whitepages_publish = models.NullBooleanField()
     first_name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     full_name = models.CharField(max_length=250)
@@ -34,6 +41,7 @@ class Person(models.Model):
     preferred_first_name = models.CharField(max_length=250)
     preferred_middle_name = models.CharField(max_length=250)
     preferred_surname = models.CharField(max_length=250)
+    whitepages_publish = models.NullBooleanField()
 
     # Affiliation flags
     is_student = models.BooleanField(default=False)
@@ -47,16 +55,19 @@ class Person(models.Model):
     employee_id = models.CharField(max_length=9, default=None)
     mailstop = models.CharField(max_length=255, default=None)
     home_department = models.CharField(max_length=255, default=None)
+    employee_state = models.CharField(max_length=16, default=None)
     publish_in_emp_directory = models.NullBooleanField()
 
     # Student attributes
     student_number = models.CharField(max_length=9, default=None)
     student_system_key = models.SlugField(max_length=10, default=None)
     student_class = models.CharField(max_length=255, default=None)
+    student_state = models.CharField(max_length=16, default=None)
     publish_in_stu_directory = models.NullBooleanField()
 
     # Alum attributes
     development_id = models.CharField(max_length=30, default=None)
+    alumni_state = models.CharField(max_length=16, default=None)
 
     def __init__(self, *args, **kwargs):
         super(Person, self).__init__(*args, **kwargs)
@@ -81,6 +92,40 @@ class Person(models.Model):
             if position.is_primary:
                 return position
         return None
+
+    def is_alum_state_current(self):
+        return (self.alumni_state is not None and
+                self.alumni_state == Person.CURRENT)
+
+    def is_emp_state_current(self):
+        # including retiree, visiting scholars, affiliate employees, and
+        # contract individuals, who have active worker or contract
+        # contingent worker records in Workday
+        return (self.employee_state is not None and
+                self.employee_state == Person.CURRENT)
+
+    def is_stud_state_current(self):
+        # including applicant and student
+        return (self.student_state is not None and
+                self.student_state == Person.CURRENT)
+
+    def is_alum_state_prior(self):
+        return (self.alumni_state is not None and
+                self.alumni_state == Person.PRIOR)
+
+    def is_emp_state_prior(self):
+        return (self.employee_state is not None and
+                self.employee_state == Person.PRIOR)
+
+    def is_stud_state_prior(self):
+        return (self.student_state is not None and
+                self.student_state == Person.PRIOR)
+
+    def is_retiree(self):
+        primary_pos = self.get_primary_position()
+        return (self.is_emp_state_current() and
+                primary_pos is not None and
+                primary_pos.is_retiree())
 
     def json_data(self):
         return {
@@ -111,6 +156,9 @@ class Person(models.Model):
             'student_departments': self.student_departments,
             'publish_in_stu_directory': self.publish_in_stu_directory,
             'development_id': self.development_id,
+            'alumni_state': self.alumni_state,
+            'employee_state': self.employee_state,
+            'student_state': self.student_state
         }
 
     def get_formatted_name(self, string_format='{first} {middle} {last}'):
@@ -158,8 +206,11 @@ class Person(models.Model):
             person.employee_id = emp_affil.get('EmployeeID')
             person.mailstop = emp_affil.get('MailStop')
             person.home_department = emp_affil.get('HomeDepartment')
-
+            person.employee_state = emp_affil.get(
+                "EmployeeAffiliationState")
             e_pages = emp_affil.get('EmployeeWhitePages', {})
+            for pos_data in e_pages.get("Positions", []):
+                person.positions.append(Position.from_json(pos_data))
             person.publish_in_emp_directory = e_pages.get("PublishInDirectory")
             if person.publish_in_emp_directory:
                 person.addresses = e_pages.get("Addresses")
@@ -171,14 +222,11 @@ class Person(models.Model):
                 person.touch_dials = e_pages.get("TouchDials")
                 person.voice_mails = e_pages.get("VoiceMails")
 
-                for pos_data in e_pages.get("Positions", []):
-                    person.positions.append(Position.from_json(pos_data))
-
         if 'StudentPersonAffiliation' in person_affiliations:
             stu_affil = person_affiliations.get('StudentPersonAffiliation')
             person.student_number = stu_affil.get('StudentNumber')
             person.student_system_key = stu_affil.get('StudentSystemKey')
-
+            person.student_state = stu_affil.get("StudentAffiliationState")
             s_pages = stu_affil.get("StudentWhitePages", {})
             person.publish_in_stu_directory = s_pages.get("PublishInDirectory")
             person.student_class = s_pages.get("Class")
@@ -187,7 +235,7 @@ class Person(models.Model):
         if 'AlumPersonAffiliation' in person_affiliations:
             alum_affil = person_affiliations.get('AlumPersonAffiliation')
             person.development_id = alum_affil.get('DevelopmentID')
-
+            person.alumni_state = alum_affil.get("AlumAffiliationState")
         return person
 
 

@@ -1,1 +1,62 @@
-{"PreferredSurname": null, "WhitepagesPublish": true, "DisplayName": "BILL AVERAGE TEACHER", "UIDNumber": "35343", "RegisteredFirstMiddleName": "BILL AVERAGE", "PreferredMiddleName": null, "PreferredFirstName": null, "UWRegID": "FBB38FE46A7C11D5A4AE0004AC494FFE", "RegisteredName": "BILL AVERAGE TEACHER", "IsTestEntity": false, "RegisteredSurname": "TEACHER", "EduPersonAffiliations": ["member", "alum", "staff", "employee"], "PriorUWRegIDs": [], "PersonAffiliations": {"AlumPersonAffiliation": {"DevelopmentID": "0000995897"}, "EmployeePersonAffiliation": {"EmployeeWhitePages": {"TouchDials": [], "Name": "BILL AVERAGE TEACHER", "Positions": [{"EWPDept": "UW-IT", "EWPTitle": "Associate Professor", "Primary": true}], "VoiceMails": ["425-555-1237"], "EmailAddresses": ["bill@u.washington.edu"], "PublishInDirectory": true, "Pagers": [], "Faxes": ["206 555-1234"], "Addresses": ["4518 University Way NE Seattle, WA 98105"], "Phones": ["206 555-1235", "425 555-1236"], "Mobiles": []}, "MailStop": "354744", "EmployeeID": "123456781", "HomeDepartment": "OVP OF UW IT"}}, "RepositoryTimeStamp": "05/02/2018 04:20:58 PM", "PriorUWNetIDs": [], "UWNetID": "bill"}
+{
+"WhitepagesPublish": true,
+"DisplayName": "Bill Teacher",
+"UIDNumber": "11111",
+"UWRegID": "FBB38FE46A7C11D5A4AE0004AC494FFE",
+"UWNetID": "bill",
+"PriorUWNetIDs": [],
+"PriorUWRegIDs": [],
+"RegisteredFirstMiddleName": "Bill Average",
+"PreferredMiddleName": null,
+"PreferredFirstName": null,
+"PreferredSurname": null,
+"RegisteredName": "Bill Average Teacher",
+"IsTestEntity": false,
+"RegisteredSurname": "Teacher",
+"EduPersonAffiliations": ["member",
+                          "alum",
+                          "faculty",
+                          "staff",
+                          "employee"],
+"PersonAffiliations": {
+  "StudentPersonAffiliation": {
+    "StudentNumber": "0111111",
+    "StudentSystemKey": "000111111",
+    "StudentAffiliationState":"prior",
+    "StudentWhitePages": {
+       "Name": "Teacher, Bill",
+       "Phone":null,
+       "Email":null,
+       "PublishInDirectory":false,
+       "Class":null,
+       "Departments":[]}},
+  "AlumPersonAffiliation": {
+    "DevelopmentID": "0000111111",
+    "AlumAffiliationState":"current"},
+  "EmployeePersonAffiliation": {
+    "EmployeeAffiliationState": "current",
+    "EmployeeWhitePages": {
+        "Name": "Teacher, Bill",
+        "Positions": [
+            {"EWPDept":"Family Medicine",
+             "EWPTitle":"Associate Professor",
+             "Primary":true},
+            {"EWPDept":"Family Medicine",
+             "EWPTitle":"Associate Professor - Non Salaried",
+             "Primary":false}],
+        "VoiceMails": ["+1 425 222-2222"],
+        "EmailAddresses": ["bill@uw.edu"],
+        "PublishInDirectory": true,
+        "Pagers": [],
+        "Faxes": ["+1 425 111-1111"],
+        "Addresses": ["Seattle, WA 98105"],
+        "Phones": ["+1 206 333-3333",
+                   "+1 425 555-1236"],
+        "Mobiles": ["+1 425 666-6666"]
+    },
+    "MailStop": "354744",
+    "EmployeeID": "123456782",
+    "HomeDepartment": "Family Medicine"}
+ },
+ "RepositoryTimeStamp": "05/02/2018 04:00:57 PM"
+}
