@@ -98,11 +98,14 @@ class Person(models.Model):
                 self.alumni_state == Person.CURRENT)
 
     def is_emp_state_current(self):
-        # this include retiree
+        # including retiree, visiting scholars, affiliate employees, and
+        # contract individuals, who have active worker or contract
+        # contingent worker records in Workday
         return (self.employee_state is not None and
                 self.employee_state == Person.CURRENT)
 
     def is_stud_state_current(self):
+        # including applicant and student
         return (self.student_state is not None and
                 self.student_state == Person.CURRENT)
 
