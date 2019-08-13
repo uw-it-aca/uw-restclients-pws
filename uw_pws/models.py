@@ -120,7 +120,9 @@ class Person(models.Model):
 
     def is_retiree(self):
         primary_pos = self.get_primary_position()
-        return primary_pos is not None and primary_pos.is_retiree()
+        return (self.is_emp_state_current() and
+                primary_pos is not None and
+                primary_pos.is_retiree())
 
     def json_data(self):
         return {
@@ -204,6 +206,8 @@ class Person(models.Model):
             person.employee_state = emp_affil.get(
                 "EmployeeAffiliationState")
             e_pages = emp_affil.get('EmployeeWhitePages', {})
+            for pos_data in e_pages.get("Positions", []):
+                person.positions.append(Position.from_json(pos_data))
             person.publish_in_emp_directory = e_pages.get("PublishInDirectory")
             if person.publish_in_emp_directory:
                 person.addresses = e_pages.get("Addresses")
@@ -214,9 +218,6 @@ class Person(models.Model):
                 person.phones = e_pages.get("Phones")
                 person.touch_dials = e_pages.get("TouchDials")
                 person.voice_mails = e_pages.get("VoiceMails")
-
-                for pos_data in e_pages.get("Positions", []):
-                    person.positions.append(Position.from_json(pos_data))
 
         if 'StudentPersonAffiliation' in person_affiliations:
             stu_affil = person_affiliations.get('StudentPersonAffiliation')
