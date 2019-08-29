@@ -1,1 +1,61 @@
-{"DisplayName":"PHIL AVERAGE TEACHER","EduPersonAffiliations":["member","alum","staff","employee"],"IsTestEntity":false,"PriorUWNetIDs":[],"PriorUWRegIDs":[],"RegisteredFirstMiddleName":"PHIL AVERAGE","RegisteredName":"PHIL AVERAGE TEACHER","RegisteredSurname":"TEACHER","UIDNumber":"70926","UWNetID":"phil","UWRegID":"A9D2DDFA6A7D11D5A4AE0004AC494FFE","WhitepagesPublish":true,"PersonAffiliations":{"PersonFullURI":{"DisplayName":"PHIL AVERAGE","Href":"\/identity\/v1\/person\/A9D2DDFA6A7D11D5A4AE0004AC494FFE\/full.json","UWNetID":"phil","UWRegID":"A9D2DDFA6A7D11D5A4AE0004AC494FFE"}}}
+{
+ "PersonAffiliations":{
+    "AlumPersonAffiliation":{
+        "DevelopmentID":"0001000084",
+        "AlumAffiliationState":"current"},
+    "EmployeePersonAffiliation":{
+        "EmployeeID":"850000498",
+        "EmployeeAffiliationState":"current",
+        "HomeDepartment":"UW-IT:",
+        "MailStop":"354812",
+        "EmployeeWhitePages":{
+            "Name":"Teacher, Phil Average",
+            "PublishInDirectory":true,
+            "Phones":[],
+            "EmailAddresses":[],
+            "Positions":[{
+                "EWPDept":"UW-IT",
+                "EWPTitle":"VP",
+                "Primary":true}],
+            "Addresses":[],
+            "VoiceMails":[],
+            "TouchDials":[],
+            "Faxes":[],
+            "Mobiles":[],
+            "Pagers":[]}},
+    "StudentPersonAffiliation":{
+        "StudentNumber":"1000050",
+        "StudentAffiliationState":"prior",
+        "StudentSystemKey":"001000043",
+        "StudentWhitePages":{
+            "Name":null,
+            "Phone":null,
+            "Email":null,
+            "PublishInDirectory":false,
+            "Class":null,
+            "Departments":[]}}
+ },
+ "PersonFullURI":{
+ "DisplayName":"PHIL AVERAGE",
+  "UWNetID":"phil",
+ "UWRegID":"A9D2DDFA6A7D11D5A4AE0004AC494FFE"},
+ "DisplayName":"Phil Average Teacher",
+ "EduPersonAffiliations":["member",
+                          "alum",
+                          "faculty",
+                          "employee"],
+ "IsTestEntity":false,
+ "PriorUWNetIDs":[],
+ "PriorUWRegIDs":[],
+ "UIDNumber":"400004",
+ "IsTestEntity":false,
+ "RegisteredName":"Phil Average Teacher",
+ "RegisteredSurname":"Teacher",
+ "RegisteredFirstMiddleName":"Phil Average",
+ "PreferredSurname":"Teacher",
+ "PreferredFirstName":"Phil",
+ "PreferredMiddleName":"Average",
+ "UWNetID":"phil",
+ "UWRegID":"A9D2DDFA6A7D11D5A4AE0004AC494FFE",
+ "WhitepagesPublish":true
+}

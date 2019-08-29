@@ -14,6 +14,8 @@ class PWSTestPersonData(TestCase):
     def test_by_regid(self):
         # Valid data, shouldn't throw exceptions
         self._test_regid('javerage', '9136CCB8F66711D5BE060004AC494FFE')
+        self._test_regid('phil', 'A9D2DDFA6A7D11D5A4AE0004AC494FFE')
+        self._test_regid('eight', '12345678901234567890123456789012')
 
     def test_by_netid(self):
         # Valid data, shouldn't throw exceptions
