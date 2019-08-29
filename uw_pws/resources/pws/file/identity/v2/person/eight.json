@@ -6,7 +6,7 @@
 "PreferredMiddleName": null,
 "PreferredFirstName": null,
 "PreferredSurname": null,
-"UWNetID": "eight"
+"UWNetID": "eight",
 "UWRegID": "12345678901234567890123456789012",
 "RegisteredName": "EIGHT CLASS STUDENT",
 "RegisteredSurname": "STUDENT",
@@ -56,5 +56,5 @@
             "PublishInDirectory": false,
             "Class": "Junior"}
     },
-    "RepositoryTimeStamp": "05/02/2018 04:16:11 PM",
+    "RepositoryTimeStamp": "05/02/2018 04:16:11 PM"
 }
