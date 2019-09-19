@@ -45,12 +45,7 @@ class PWS(object):
             raise InvalidRegID(regid)
 
         url = "{}/{}/full.json".format(PERSON_PREFIX, regid.upper())
-        response = DAO.getURL(url, {"Accept": "application/json"})
-
-        if response.status != 200:
-            raise DataFailureException(url, response.status, response.data)
-
-        return self._person_from_json(response.data)
+        return Person.from_json(self._get_resource(url))
 
     def get_person_by_netid(self, netid):
         """
@@ -62,12 +57,7 @@ class PWS(object):
             raise InvalidNetID(netid)
 
         url = "{}/{}/full.json".format(PERSON_PREFIX, netid.lower())
-        response = DAO.getURL(url, {"Accept": "application/json"})
-
-        if response.status != 200:
-            raise DataFailureException(url, response.status, response.data)
-
-        return self._person_from_json(response.data)
+        return Person.from_json(self._get_resource(url))
 
     def get_person_by_employee_id(self, employee_id):
         """
@@ -78,20 +68,14 @@ class PWS(object):
         if not self.valid_employee_id(employee_id):
             raise InvalidEmployeeID(employee_id)
 
-        url = "{}.json?{}".format(
+        url = "{}.json?{}&verbose=on".format(
             PERSON_PREFIX, urlencode({"employee_id": employee_id}))
-        response = DAO.getURL(url, {"Accept": "application/json"})
-
-        if response.status != 200:
-            raise DataFailureException(url, response.status, response.data)
+        data = self._get_resource(url)
 
         # Search does not return a full person resource
-        data = json.loads(response.data)
         if not len(data["Persons"]):
             raise DataFailureException(url, 404, "No person found")
-
-        regid = data["Persons"][0]["PersonURI"]["UWRegID"]
-        return self.get_person_by_regid(regid)
+        return Person.from_json(data["Persons"][0])
 
     def get_person_by_student_number(self, student_number):
         """
@@ -102,20 +86,63 @@ class PWS(object):
         if not self.valid_student_number(student_number):
             raise InvalidStudentNumber(student_number)
 
-        url = "{}.json?{}".format(
+        url = "{}.json?{}&verbose=on".format(
             PERSON_PREFIX, urlencode({"student_number": student_number}))
-        response = DAO.getURL(url, {"Accept": "application/json"})
-
-        if response.status != 200:
-            raise DataFailureException(url, response.status, response.data)
+        data = self._get_resource(url)
 
         # Search does not return a full person resource
-        data = json.loads(response.data)
         if not len(data["Persons"]):
             raise DataFailureException(url, 404, "No person found")
 
-        regid = data["Persons"][0]["PersonURI"]["UWRegID"]
-        return self.get_person_by_regid(regid)
+        return Person.from_json(data["Persons"][0])
+
+    def person_search(self, **kwargs):
+        """
+        Returns a list of Person objects
+        Parameters can be: uwregid=UWRegId
+        uwnetid=UWNetId
+        employee_id=EmployeeId
+        student_number=StudentNumber
+        student_system_key=StudentSystemKey
+        development_id=DevelopmentId
+        edupersonaffiliation_student={true/false}
+        edupersonaffiliation_staff={true/false}
+        edupersonaffiliation_faculty={true/false}
+        edupersonaffiliation_employee={true/false}
+        edupersonaffiliation_member={true/false}
+        edupersonaffiliation_alum={true/false}
+        edupersonaffiliation_affiliate={true/false}
+        changed_since_date=YYYY-MM-DD+hh:mm:ss (5 minutes ago up to 24 hours)
+        last_name=LastName
+        first_name=FirstName
+        registered_surname=
+        registered_first_middle_name=
+        phone_number=
+        mail_stop=
+        home_dept=
+        department=
+        address=
+        title=
+        email=
+        page_start=
+        """
+        url = "{}.json?{}&page_size=250&verbose=on".format(
+            PERSON_PREFIX, urlencode(kwargs))
+
+        persons = []
+
+        while True:
+            data = self._get_resource(url)
+
+            if len(data["Persons"]) > 0:
+                for person_data in data.get("Persons"):
+                    persons.append(Person.from_json(person_data))
+
+            if data.get("Next") is not None and len(data["Next"]["Href"]) > 0:
+                url = data["Next"]["Href"]
+            else:
+                break
+        return persons
 
     def get_person_by_prox_rfid(self, prox_rfid):
         """
@@ -128,12 +155,7 @@ class PWS(object):
 
         url = "{}.json?{}".format(
             CARD_PREFIX, urlencode({"prox_rfid": prox_rfid}))
-        response = DAO.getURL(url, {"Accept": "application/json"})
-
-        if response.status != 200:
-            raise DataFailureException(url, response.status, response.data)
-
-        data = json.loads(response.data)
+        data = self._get_resource(url)
         if not len(data["Cards"]):
             raise DataFailureException(url, 404, "No card found")
 
@@ -150,12 +172,7 @@ class PWS(object):
             raise InvalidRegID(regid)
 
         url = "{}/{}.json".format(ENTITY_PREFIX, regid.upper())
-        response = DAO.getURL(url, {"Accept": "application/json"})
-
-        if response.status != 200:
-            raise DataFailureException(url, response.status, response.data)
-
-        return self._entity_from_json(response.data)
+        return Entity.from_json(self._get_resource(url))
 
     def get_entity_by_netid(self, netid):
         """
@@ -167,12 +184,7 @@ class PWS(object):
             raise InvalidNetID(netid)
 
         url = "{}/{}.json".format(ENTITY_PREFIX, netid.lower())
-        response = DAO.getURL(url, {"Accept": "application/json"})
-
-        if response.status != 200:
-            raise DataFailureException(url, response.status, response.data)
-
-        return self._entity_from_json(response.data)
+        return Entity.from_json(self._get_resource(url))
 
     def get_idcard_photo(self, regid, size="medium"):
         """
@@ -206,6 +218,17 @@ class PWS(object):
 
         return streamIO(response.data)
 
+    def _get_resource(self, url,
+                      header={"Accept": "application/json",
+                              'Connection': 'keep-alive'}):
+        response = DAO.getURL(url, header)
+
+        if response.status != 200:
+            raise DataFailureException(url, response.status, response.data)
+
+        # Search does not return a full person resource
+        return json.loads(response.data)
+
     def valid_uwnetid(self, netid):
         return (netid is not None and
                 self._re_netid.match(str(netid)) is not None)
@@ -226,11 +249,3 @@ class PWS(object):
     def valid_prox_rfid(self, prox_rfid):
         return (prox_rfid is not None and
                 self._re_prox_rfid.match(str(prox_rfid)) is not None)
-
-    def _person_from_json(self, data):
-        person_data = json.loads(data)
-        return Person.from_json(person_data)
-
-    def _entity_from_json(self, data):
-        entity_data = json.loads(data)
-        return Entity.from_json(entity_data)

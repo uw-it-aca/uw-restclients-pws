@@ -20,6 +20,8 @@ class PWSTestPersonData(TestCase):
     def test_by_netid(self):
         # Valid data, shouldn't throw exceptions
         self._test_netid('javerage', '9136CCB8F66711D5BE060004AC494FFE')
+        self._test_netid('phil', 'A9D2DDFA6A7D11D5A4AE0004AC494FFE')
+        self._test_netid('eight', '12345678901234567890123456789012')
 
     def test_prior_ids(self):
         pws = PWS()
@@ -62,6 +64,12 @@ class PWSTestPersonData(TestCase):
         self.assertRaises(InvalidStudentNumber,
                           pws.get_person_by_student_number,
                           '123456')
+
+    def test_person_search(self):
+        persons = PWS().person_search(changed_since_date=2019)
+        self.assertEqual(len(persons), 2)
+        self.assertEqual(persons[0].uwnetid, "javerage")
+        self.assertEqual(persons[1].uwnetid, "phil")
 
     def test_names(self):
         pws = PWS()
