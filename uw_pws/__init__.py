@@ -18,7 +18,6 @@ PERSON_PREFIX = '/identity/v2/person'
 ENTITY_PREFIX = '/identity/v2/entity'
 CARD_PREFIX = '/idcard/v1/card'
 PHOTO_PREFIX = '/idcard/v1/photo'
-DAO = PWS_DAO()
 
 
 class PWS(object):
@@ -34,6 +33,7 @@ class PWS(object):
         self._re_employee_id = re.compile(r'^\d{9}$')
         self._re_student_number = re.compile(r'^\d{7}$')
         self._re_prox_rfid = re.compile(r'^\d{16}$')
+        self.dao = PWS_DAO()
 
     def get_person_by_regid(self, regid):
         """
@@ -211,7 +211,7 @@ class PWS(object):
                 raise InvalidNetID(self.actas)
             headers["X-UW-Act-as"] = self.actas
 
-        response = DAO.getURL(url, headers)
+        response = self.dao.getURL(url, headers)
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
@@ -221,7 +221,7 @@ class PWS(object):
     def _get_resource(self, url,
                       header={"Accept": "application/json",
                               'Connection': 'keep-alive'}):
-        response = DAO.getURL(url, header)
+        response = self.dao.getURL(url, header)
 
         if response.status != 200:
             raise DataFailureException(url, response.status, response.data)
