@@ -1,0 +1,91 @@
+{
+    "TotalCount":1,
+    "PageStart":"1",
+    "Current": {
+        "DevelopmentID": null,
+        "EduPersonAffiliationAffiliate": null,
+        "EduPersonAffiliationAlum": null,
+        "EduPersonAffiliationEmployee": null,
+        "EduPersonAffiliationFaculty": null,
+        "EduPersonAffiliationMember": null,
+        "EduPersonAffiliationStaff": null,
+        "EduPersonAffiliationStudent": null,
+        "EmployeeID": "123456789",
+        "Href": "",
+        "PageSize": "10",
+        "PageStart": "1",
+        "RegisteredFirstMiddleName": null,
+        "RegisteredSurname": null,
+        "Start": "1",
+        "StudentNumber": "1234567",
+        "StudentSystemKey": null,
+        "UWNetID": null,
+        "UWRegID": null
+    },
+    "MaxResultSize": 500,
+    "Persons": [
+    {
+ "PersonAffiliations":{
+    "AlumPersonAffiliation":{
+        "DevelopmentID":"0001000084",
+        "AlumAffiliationState":"current"},
+    "EmployeePersonAffiliation":{
+        "EmployeeID":"850000498",
+        "EmployeeAffiliationState":"current",
+        "HomeDepartment":"UW-IT:",
+        "MailStop":"354812",
+        "EmployeeWhitePages":{
+            "Name":"Teacher, Phil Average",
+            "PublishInDirectory":true,
+            "Phones":[],
+            "EmailAddresses":[],
+            "Positions":[{
+                "EWPDept":"UW-IT",
+                "EWPTitle":"VP",
+                "Primary":true}],
+            "Addresses":[],
+            "VoiceMails":[],
+            "TouchDials":[],
+            "Faxes":[],
+            "Mobiles":[],
+            "Pagers":[]}},
+    "StudentPersonAffiliation":{
+        "StudentNumber":"1000050",
+        "StudentAffiliationState":"prior",
+        "StudentSystemKey":"001000043",
+        "StudentWhitePages":{
+            "Name":null,
+            "Phone":null,
+            "Email":null,
+            "PublishInDirectory":false,
+            "Class":null,
+            "Departments":[]}}
+ },
+ "PersonFullURI":{
+ "DisplayName":"PHIL AVERAGE",
+  "UWNetID":"phil",
+ "UWRegID":"A9D2DDFA6A7D11D5A4AE0004AC494FFE"},
+ "DisplayName":"Phil Average Teacher",
+ "EduPersonAffiliations":["member",
+                          "alum",
+                          "faculty",
+                          "employee"],
+ "IsTestEntity":false,
+ "PriorUWNetIDs":[],
+ "PriorUWRegIDs":[],
+ "UIDNumber":"400004",
+ "IsTestEntity":false,
+ "RegisteredName":"Phil Average Teacher",
+ "RegisteredSurname":"Teacher",
+ "RegisteredFirstMiddleName":"Phil Average",
+ "PreferredSurname":"Teacher",
+ "PreferredFirstName":"Phil",
+ "PreferredMiddleName":"Average",
+ "UWNetID":"phil",
+ "UWRegID":"A9D2DDFA6A7D11D5A4AE0004AC494FFE",
+ "WhitepagesPublish":true
+}
+    ],
+    "Next":null,
+    "Previous": null
+}
