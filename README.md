@@ -28,4 +28,21 @@ Optional settings:
     RESTCLIENTS_PWS_TIMEOUT=5
     RESTCLIENTS_PWS_POOL_SIZE=10
 
-See examples for usage.  Pull requests welcome.
+How to use this client:
+
+    from commonconf.backends import use_configparser_backend                        
+    from commonconf import settings
+    from uw_pws import PWS
+    import os
+    
+    
+    if __name__ == '__main__':
+        settings_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+                                     'settings.cfg')
+        use_configparser_backend(settings_path, 'PWS')
+        
+        client = PWS()
+        person1 = client.get_person_by_netid('javerage')
+        person2 = client.get_person_by_regid('12345678901234567890123456789012')
+        person3 = client.get_person_by_student_number('1234567')
+    
