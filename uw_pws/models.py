@@ -33,7 +33,7 @@ class Person(models.Model):
     PRIOR = "prior"
 
     uwregid = models.CharField(max_length=32)
-    uwnetid = models.SlugField(max_length=16)
+    uwnetid = models.CharField(max_length=128)
     first_name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
     full_name = models.CharField(max_length=250)
