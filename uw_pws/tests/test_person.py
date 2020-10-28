@@ -102,6 +102,22 @@ class PWSTestPersonData(TestCase):
             person.get_formatted_name(string_format='{first} {last}'),
             "James Student")
 
+    def test_first_last_name(self):
+        pws = PWS()
+        person = pws.get_person_by_netid('javerage')
+        self.assertEquals(person.get_first_last_name(),
+                          ('Jamesy', 'McJamesy'))
+
+        person = pws.get_person_by_netid('javerage')
+        person.preferred_surname = None
+        self.assertEquals(person.get_first_last_name(),
+                          ('JAMES AVERAGE', 'STUDENT'))
+
+        person = pws.get_person_by_netid('javerage')
+        person.preferred_first_name = ''
+        self.assertEquals(person.get_first_last_name(),
+                          ('JAMES AVERAGE', 'STUDENT'))
+
     def test_bad_netids(self):
         # Invalid data, should throw exceptions
         pws = PWS()
