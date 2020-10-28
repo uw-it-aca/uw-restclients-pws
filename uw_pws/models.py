@@ -171,6 +171,19 @@ class Person(models.Model):
             name.string_format = string_format
             return str(name)
 
+    def get_first_last_name(self):
+        """
+        Returns a tuple containing first_name, last_name, using preferred name
+        if available, otherwise institutional name.
+        """
+        if (self.preferred_first_name is not None and
+                len(self.preferred_first_name) and
+                self.preferred_surname is not None and
+                len(self.preferred_surname)):
+            return self.preferred_first_name, self.preferred_surname
+
+        return self.first_name, self.surname
+
     @staticmethod
     def from_json(data):
         person = Person()
