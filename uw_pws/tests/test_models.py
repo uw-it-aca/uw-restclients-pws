@@ -93,6 +93,7 @@ class TestModels(TestCase):
              'surname': 'Teacher',
              'full_name': 'Bill Average Teacher',
              'display_name': 'Bill Teacher',
+             'pronouns': None,
              'whitepages_publish': True,
              'employee_id': '123456782',
              'addresses': ["Seattle, WA 98105"],

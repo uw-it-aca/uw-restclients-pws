@@ -41,6 +41,7 @@ class Person(models.Model):
     preferred_first_name = models.CharField(max_length=250)
     preferred_middle_name = models.CharField(max_length=250)
     preferred_surname = models.CharField(max_length=250)
+    pronouns = models.CharField(max_length=128)
     whitepages_publish = models.NullBooleanField()
 
     # Affiliation flags
@@ -136,6 +137,7 @@ class Person(models.Model):
             'surname': self.surname,
             'full_name': self.full_name,
             'display_name': self.display_name,
+            'pronouns': self.pronouns,
             'whitepages_publish': self.whitepages_publish,
             'employee_id': self.employee_id,
             'addresses': self.addresses,
@@ -200,6 +202,7 @@ class Person(models.Model):
         person.preferred_first_name = data.get("PreferredFirstName")
         person.preferred_middle_name = data.get("PreferredMiddleName")
         person.preferred_surname = data.get("PreferredSurname")
+        person.pronouns = data.get("Pronouns")
 
         for affiliation in data.get("EduPersonAffiliations", []):
             if affiliation == "student":
