@@ -6,8 +6,6 @@ See the README on `GitHub
 <https://github.com/uw-it-aca/uw-restclients-pws>`_.
 """
 
-# The VERSION file is created by travis-ci, based on the tag name
-version_path = 'uw_pws/VERSION'
 VERSION = open(os.path.join(os.path.dirname(__file__), version_path)).read()
 VERSION = VERSION.replace("\n", "")
 
