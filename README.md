@@ -1,7 +1,7 @@
 # REST client for the UW Person Web Service
 
-[![Build Status](https://github.com/uw-it-aca/uw-restclients-pws/workflows/tests/badge.svg?branch=master)](https://github.com/uw-it-aca/uw-restclients-pws/actions)
-[![Coverage Status](https://coveralls.io/repos/github/uw-it-aca/uw-restclients-pws/badge.svg?branch=master)](https://coveralls.io/github/uw-it-aca/uw-restclients-pws?branch=master)
+[![Build Status](https://github.com/uw-it-aca/uw-restclients-pws/workflows/tests/badge.svg?branch=main)](https://github.com/uw-it-aca/uw-restclients-pws/actions)
+[![Coverage Status](https://coveralls.io/repos/github/uw-it-aca/uw-restclients-pws/badge.svg?branch=main)](https://coveralls.io/github/uw-it-aca/uw-restclients-pws?branch=main)
 [![PyPi Version](https://img.shields.io/pypi/v/uw-restclients-pws.svg)](https://pypi.python.org/pypi/uw-restclients-pws)
 ![Python versions](https://img.shields.io/pypi/pyversions/uw-restclients-pws.svg)
 
