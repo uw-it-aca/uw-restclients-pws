@@ -1,0 +1,19 @@
+{
+    "DisplayName": "Jamesian McMiddle Average",
+    "EntityAffiliations": {
+        "PersonURI": {
+            "DisplayName": "Jamesian McMiddle Average",
+            "Href": "/identity/v2/person/9136CCB8F66711D5BE060004AC494FFE.json",
+            "RegisteredName": "JAMES AVERAGE STUDENT",
+            "UWNetID": "javerage",
+            "UWRegID": "9136CCB8F66711D5BE060004AC494FFE"
+        }
+    },
+    "IsTestEntity": true,
+    "PriorUWNetIDs": [],
+    "PriorUWRegIDs": [],
+    "RepositoryTimeStamp": "6/19/2021 2:32:15 AM",
+    "UIDNumber": "35443",
+    "UWNetID": "javerage",
+    "UWRegID": "9136CCB8F66711D5BE060004AC494FFE"
+}

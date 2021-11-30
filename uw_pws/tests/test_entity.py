@@ -17,7 +17,13 @@ class PWSTestEntityData(TestCase):
 
     def test_by_netid(self):
         # Valid data, shouldn't throw exceptions
-        self._test_netid('somalt', '605764A811A847E690F107D763A4B32A')
+        entity = self._test_netid('somalt',
+                                  '605764A811A847E690F107D763A4B32A')
+        self.assertFalse(entity.is_person)
+
+        entity = self._test_netid('javerage',
+                                  '9136CCB8F66711D5BE060004AC494FFE')
+        self.assertTrue(entity.is_person)
 
     def test_bad_netids(self):
         # Invalid data, should throw exceptions
@@ -59,6 +65,7 @@ class PWSTestEntityData(TestCase):
         self.assertEquals(entity.uwregid, regid, netid + "'s regid")
         self.assertEquals(len(entity.prior_uwnetids), 0)
         self.assertEquals(len(entity.prior_uwregids), 0)
+        return entity
 
     def _test_netid(self, netid, regid):
         pws = PWS()
@@ -68,3 +75,4 @@ class PWSTestEntityData(TestCase):
         self.assertEquals(entity.uwregid, regid, netid + "'s regid")
         self.assertEquals(len(entity.prior_uwnetids), 0)
         self.assertEquals(len(entity.prior_uwregids), 0)
+        return entity
