@@ -172,5 +172,7 @@ class TestModels(TestCase):
         self.assertEqual(en.json_data(),
                          {'uwnetid': "javerage",
                           'uwregid': "9136CCB8F66711D5BE060004AC494FFE",
-                          'display_name': "James McMiddle Average"})
+                          'display_name': "James McMiddle Average",
+                          'is_person': False,
+                          'is_test_entity': False})
         self.assertTrue(en == en)
