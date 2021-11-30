@@ -262,6 +262,8 @@ class Entity(models.Model):
     uwregid = models.CharField(max_length=32)
     uwnetid = models.CharField(max_length=128)
     display_name = models.CharField(max_length=250)
+    is_test_entity = models.BooleanField(default=False)
+    is_person = models.BooleanField(default=False)
 
     def __init__(self, *args, **kwargs):
         super(Entity, self).__init__(*args, **kwargs)
@@ -276,6 +278,8 @@ class Entity(models.Model):
             'uwnetid': self.uwnetid,
             'uwregid': self.uwregid,
             'display_name': self.display_name,
+            'is_test_entity': self.is_test_entity,
+            'is_person': self.is_person,
         }
 
     @staticmethod
@@ -284,6 +288,12 @@ class Entity(models.Model):
         entity.uwnetid = data.get("UWNetID")
         entity.uwregid = data.get("UWRegID")
         entity.display_name = data.get("DisplayName")
+        entity.is_test_entity = data.get("IsTestEntity")
         entity.prior_uwnetids = data.get("PriorUWNetIDs", [])
         entity.prior_uwregids = data.get("PriorUWRegIDs", [])
+
+        entity_affiliations = data.get('EntityAffiliations', {})
+        if "PersonURI" in entity_affiliations:
+            entity.is_person = True
+
         return entity
