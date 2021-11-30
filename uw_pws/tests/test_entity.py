@@ -18,6 +18,7 @@ class PWSTestEntityData(TestCase):
     def test_by_netid(self):
         # Valid data, shouldn't throw exceptions
         self._test_netid('somalt', '605764A811A847E690F107D763A4B32A')
+        self._test_netid('javerage', '9136CCB8F66711D5BE060004AC494FFE')
 
     def test_bad_netids(self):
         # Invalid data, should throw exceptions
