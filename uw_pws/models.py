@@ -292,8 +292,8 @@ class Entity(models.Model):
         entity.prior_uwnetids = data.get("PriorUWNetIDs", [])
         entity.prior_uwregids = data.get("PriorUWRegIDs", [])
 
-        entity_affiliations = data.get('EntityAffiliations', {})
-        if "PersonURI" in entity_affiliations:
+        entity_affiliations = data.get("EntityAffiliations")
+        if (entity_affiliations and "PersonURI" in entity_affiliations):
             entity.is_person = True
 
         return entity
