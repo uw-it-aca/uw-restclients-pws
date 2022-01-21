@@ -11,6 +11,13 @@ from uw_pws.util import fdao_pws_override
 @fdao_pws_override
 class PWSTestEntityData(TestCase):
 
+    def test_entity_search(self):
+        pws = PWS()
+        entities = pws.entity_search(is_test_entity=True)
+        self.assertEqual(len(entities), 2)
+        self.assertEqual(entities[0].uwnetid, "edwtest11")
+        self.assertEqual(entities[1].uwnetid, "efecstest10")
+
     def test_by_regid(self):
         # Valid data, shouldn't throw exceptions
         self._test_regid('somalt', '605764A811A847E690F107D763A4B32A')
