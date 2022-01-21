@@ -1,0 +1,36 @@
+{
+    "Current": {
+        "ChangedSinceDate": null,
+        "DisplayName": null,
+        "Href": "/identity/v2/entity.json?display_name=&is_test_entity=true&only_entities=&changed_since_date=&uwnetid=&page_size=500&page_start=1",
+        "IsTestEntity": true,
+        "OnlyEntities": false,
+        "PageSize": "500",
+        "PageStart": "1",
+        "UWNetID": null
+    },
+    "Entities": [
+        {
+            "DisplayName": "EDW TEST",
+            "EntityURI": {
+                "DisplayName": "EDW TEST",
+                "Href": "/identity/v2/entity/12345678123456781234567812345678.json",
+                "UWNetID": "edwtest11",
+                "UWRegID": "12345678123456781234567812345678"
+            },
+            "Href": "/identity/v2/entity/edwtest11.json",
+            "UWNetID": "edwtest11"
+        },
+        {
+            "DisplayName": "EFECS TEST",
+            "EntityURI": {
+                "DisplayName": "EFECS TEST",
+                "Href": "/identity/v2/entity/87654321876543218765432187654321.json",
+                "UWNetID": "efecstest10",
+                "UWRegID": "87654321876543218765432187654321"
+            },
+            "Href": "/identity/v2/entity/efecstest10.json",
+            "UWNetID": "efecstest10"
+        }
+    ]
+}
