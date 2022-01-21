@@ -1,4 +1,4 @@
-# Copyright 2021 UW-IT, University of Washington
+# Copyright 2022 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
 """
@@ -102,7 +102,8 @@ class PWS(object):
     def person_search(self, **kwargs):
         """
         Returns a list of Person objects
-        Parameters can be: uwregid=UWRegId
+        Parameters can be:
+        uwregid=UWRegId
         uwnetid=UWNetId
         employee_id=EmployeeId
         student_number=StudentNumber
@@ -129,8 +130,11 @@ class PWS(object):
         email=
         page_start=
         """
+        # Boolean params must be lowercased
+        params = [(k, str(v).lower() if isinstance(v, bool) else v) for (
+            k, v) in kwargs.items()]
         url = "{}.json?{}&page_size=250&verbose=on".format(
-            PERSON_PREFIX, urlencode(kwargs))
+            PERSON_PREFIX, urlencode(params))
 
         persons = []
 
@@ -164,6 +168,35 @@ class PWS(object):
 
         regid = data["Cards"][0]["RegID"]
         return self.get_person_by_regid(regid)
+
+    def entity_search(self, **kwargs):
+        """
+        Returns a list of Person objects
+        Parameters can be:
+        display_name=
+        is_test_entity={true/false}
+        changed_since_date=YYYY-MM-DD+hh:mm:ss (5 minutes ago up to 24 hours)
+        """
+        # Boolean params must be lowercased
+        params = [(k, str(v).lower() if isinstance(v, bool) else v) for (
+            k, v) in kwargs.items()]
+        url = "{}.json?{}&page_size=500".format(
+            ENTITY_PREFIX, urlencode(params))
+
+        entities = []
+
+        while True:
+            data = self._get_resource(url)
+
+            if len(data["Entities"]) > 0:
+                for entity_data in data.get("Entities"):
+                    entities.append(Entity.from_json(entity_data))
+
+            if data.get("Next") is not None and len(data["Next"]["Href"]) > 0:
+                url = data["Next"]["Href"]
+            else:
+                break
+        return entities
 
     def get_entity_by_regid(self, regid):
         """
