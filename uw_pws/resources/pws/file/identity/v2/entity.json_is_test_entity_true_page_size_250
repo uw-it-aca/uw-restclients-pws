@@ -11,26 +11,26 @@
     },
     "Entities": [
         {
-            "DisplayName": "EDW TEST",
+            "DisplayName": "JAMES AVERAGE",
             "EntityURI": {
-                "DisplayName": "EDW TEST",
-                "Href": "/identity/v2/entity/12345678123456781234567812345678.json",
-                "UWNetID": "edwtest11",
-                "UWRegID": "12345678123456781234567812345678"
+                "DisplayName": "JAMES AVERAGE",
+                "Href": "/identity/v2/entity/9136CCB8F66711D5BE060004AC494FFE.json",
+                "UWNetID": "javerage",
+                "UWRegID": "9136CCB8F66711D5BE060004AC494FFE"
             },
-            "Href": "/identity/v2/entity/edwtest11.json",
-            "UWNetID": "edwtest11"
+            "Href": "/identity/v2/entity/javerage.json",
+            "UWNetID": "javerage"
         },
         {
-            "DisplayName": "EFECS TEST",
+            "DisplayName": "SOM ACADEMIC LRNG TECHNOLOGY",
             "EntityURI": {
-                "DisplayName": "EFECS TEST",
-                "Href": "/identity/v2/entity/87654321876543218765432187654321.json",
-                "UWNetID": "efecstest10",
-                "UWRegID": "87654321876543218765432187654321"
+                "DisplayName": "SOM ACADEMIC LRNG TECHNOLOGY",
+                "Href": "/identity/v2/entity/605764A811A847E690F107D763A4B32A.json",
+                "UWNetID": "somalt",
+                "UWRegID": "605764A811A847E690F107D763A4B32A"
             },
-            "Href": "/identity/v2/entity/efecstest10.json",
-            "UWNetID": "efecstest10"
+            "Href": "/identity/v2/entity/somalt.json",
+            "UWNetID": "somalt"
         }
     ]
 }
