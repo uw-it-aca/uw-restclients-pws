@@ -15,8 +15,8 @@ class PWSTestEntityData(TestCase):
         pws = PWS()
         entities = pws.entity_search(is_test_entity=True)
         self.assertEqual(len(entities), 2)
-        self.assertEqual(entities[0].uwnetid, "edwtest11")
-        self.assertEqual(entities[1].uwnetid, "efecstest10")
+        self.assertEqual(entities[0].uwnetid, "javerage")
+        self.assertEqual(entities[1].uwnetid, "somalt")
 
     def test_by_regid(self):
         # Valid data, shouldn't throw exceptions

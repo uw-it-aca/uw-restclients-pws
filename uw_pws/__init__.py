@@ -180,7 +180,7 @@ class PWS(object):
         # Boolean params must be lowercased
         params = [(k, str(v).lower() if isinstance(v, bool) else v) for (
             k, v) in kwargs.items()]
-        url = "{}.json?{}&page_size=500".format(
+        url = "{}.json?{}&page_size=250".format(
             ENTITY_PREFIX, urlencode(params))
 
         entities = []
@@ -189,8 +189,10 @@ class PWS(object):
             data = self._get_resource(url)
 
             if len(data["Entities"]) > 0:
-                for entity_data in data.get("Entities"):
-                    entities.append(Entity.from_json(entity_data))
+                for result_data in data.get("Entities"):
+                    uwnetid = result_data.get("UWNetID")
+                    if uwnetid:
+                        entities.append(self.get_entity_by_netid(uwnetid))
 
             if data.get("Next") is not None and len(data["Next"]["Href"]) > 0:
                 url = data["Next"]["Href"]

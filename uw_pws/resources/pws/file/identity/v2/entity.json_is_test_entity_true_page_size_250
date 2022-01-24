@@ -1,0 +1,36 @@
+{
+    "Current": {
+        "ChangedSinceDate": null,
+        "DisplayName": null,
+        "Href": "/identity/v2/entity.json?display_name=&is_test_entity=true&only_entities=&changed_since_date=&uwnetid=&page_size=500&page_start=1",
+        "IsTestEntity": true,
+        "OnlyEntities": false,
+        "PageSize": "250",
+        "PageStart": "1",
+        "UWNetID": null
+    },
+    "Entities": [
+        {
+            "DisplayName": "JAMES AVERAGE",
+            "EntityURI": {
+                "DisplayName": "JAMES AVERAGE",
+                "Href": "/identity/v2/entity/9136CCB8F66711D5BE060004AC494FFE.json",
+                "UWNetID": "javerage",
+                "UWRegID": "9136CCB8F66711D5BE060004AC494FFE"
+            },
+            "Href": "/identity/v2/entity/javerage.json",
+            "UWNetID": "javerage"
+        },
+        {
+            "DisplayName": "SOM ACADEMIC LRNG TECHNOLOGY",
+            "EntityURI": {
+                "DisplayName": "SOM ACADEMIC LRNG TECHNOLOGY",
+                "Href": "/identity/v2/entity/605764A811A847E690F107D763A4B32A.json",
+                "UWNetID": "somalt",
+                "UWRegID": "605764A811A847E690F107D763A4B32A"
+            },
+            "Href": "/identity/v2/entity/somalt.json",
+            "UWNetID": "somalt"
+        }
+    ]
+}
