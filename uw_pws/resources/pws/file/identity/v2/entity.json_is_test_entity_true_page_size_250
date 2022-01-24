@@ -5,7 +5,7 @@
         "Href": "/identity/v2/entity.json?display_name=&is_test_entity=true&only_entities=&changed_since_date=&uwnetid=&page_size=500&page_start=1",
         "IsTestEntity": true,
         "OnlyEntities": false,
-        "PageSize": "500",
+        "PageSize": "250",
         "PageStart": "1",
         "UWNetID": null
     },
