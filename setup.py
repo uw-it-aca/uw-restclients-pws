@@ -1,3 +1,6 @@
+# Copyright 2023 UW-IT, University of Washington
+# SPDX-License-Identifier: Apache-2.0
+
 import os
 from setuptools import setup
 
@@ -22,8 +25,8 @@ setup(
     author_email="aca-it@uw.edu",
     include_package_data=True,
     install_requires=[
-        'UW-RestClients-Core<2.0',
-        'nameparser>=1.0.4,<2.0',
+        'UW-RestClients-Core',
+        'nameparser',
     ],
     license='Apache License, Version 2.0',
     description=('A library for connecting to the Person Web Service at the '
