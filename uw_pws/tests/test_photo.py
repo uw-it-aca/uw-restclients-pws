@@ -1,4 +1,4 @@
-# Copyright 2023 UW-IT, University of Washington
+# Copyright 2024 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
 from unittest import TestCase
@@ -18,21 +18,21 @@ class IdCardTestPhoto(TestCase):
         person = Person(uwregid="9136CCB8F66711D5BE060004AC494FFE")
 
         pws = PWS()
-        self.assertEquals(pws.actas, None, "Correct actas attribute")
+        self.assertEqual(pws.actas, None, "Correct actas attribute")
 
         pws = PWS(actas=user.uwnetid)
-        self.assertEquals(pws.actas, user.uwnetid, "Correct actas attribute")
+        self.assertEqual(pws.actas, user.uwnetid, "Correct actas attribute")
 
         pws = PWS(actas="")
-        self.assertEquals(pws.actas, "", "Empty str actas attribute")
+        self.assertEqual(pws.actas, "", "Empty str actas attribute")
         self.assertRaises(InvalidNetID, pws.get_idcard_photo, person.uwregid)
 
         pws = PWS(actas="000")
-        self.assertEquals(pws.actas, "000", "Invalid actas attribute")
+        self.assertEqual(pws.actas, "000", "Invalid actas attribute")
         self.assertRaises(InvalidNetID, pws.get_idcard_photo, person.uwregid)
 
         pws = PWS(actas=67)
-        self.assertEquals(pws.actas, 67, "Invalid actas attribute")
+        self.assertEqual(pws.actas, 67, "Invalid actas attribute")
         self.assertRaises(InvalidNetID, pws.get_idcard_photo, person.uwregid)
 
     def test_photo_size(self):
@@ -42,10 +42,10 @@ class IdCardTestPhoto(TestCase):
 
         img = pws.get_idcard_photo(person.uwregid)
         try:
-            self.assertEquals(img.len, 4661, "Correct file for default size")
+            self.assertEqual(img.len, 4661, "Correct file for default size")
         except Exception:
             size = img.getbuffer().nbytes
-            self.assertEquals(size, 4661, "Correct file for default size")
+            self.assertEqual(size, 4661, "Correct file for default size")
 
         self.assertRaises(InvalidRegID, pws.get_idcard_photo, "ABC")
 
