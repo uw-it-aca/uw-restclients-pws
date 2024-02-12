@@ -1,4 +1,4 @@
-# Copyright 2023 UW-IT, University of Washington
+# Copyright 2024 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
 from unittest import TestCase
@@ -14,9 +14,9 @@ class IdCardTestCard(TestCase):
     def test_by_rfid(self):
         pws = PWS()
         person = pws.get_person_by_prox_rfid('1223221621633408')
-        self.assertEquals(person.uwnetid, 'javerage', "Correct netid")
-        self.assertEquals(person.uwregid,
-                          '9136CCB8F66711D5BE060004AC494FFE', "Correct regid")
+        self.assertEqual(person.uwnetid, 'javerage', "Correct netid")
+        self.assertEqual(person.uwregid,
+                         '9136CCB8F66711D5BE060004AC494FFE', "Correct regid")
 
         # Valid non-existent RFID
         self.assertRaises(DataFailureException,

@@ -1,4 +1,4 @@
-# Copyright 2023 UW-IT, University of Washington
+# Copyright 2024 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
 from unittest import TestCase
@@ -60,26 +60,26 @@ class PWSTestEntityData(TestCase):
                           pws.get_entity_by_regid,
                           "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG")
 
-        self.assertNotEquals(None,
-                             pws.get_entity_by_regid,
-                             "605764A811A847E690F107D763A4B32A")
+        self.assertNotEqual(None,
+                            pws.get_entity_by_regid,
+                            "605764A811A847E690F107D763A4B32A")
 
     def _test_regid(self, netid, regid):
         pws = PWS()
         entity = pws.get_entity_by_regid(regid)
 
-        self.assertEquals(entity.uwnetid, netid, netid + "'s netid")
-        self.assertEquals(entity.uwregid, regid, netid + "'s regid")
-        self.assertEquals(len(entity.prior_uwnetids), 0)
-        self.assertEquals(len(entity.prior_uwregids), 0)
+        self.assertEqual(entity.uwnetid, netid, netid + "'s netid")
+        self.assertEqual(entity.uwregid, regid, netid + "'s regid")
+        self.assertEqual(len(entity.prior_uwnetids), 0)
+        self.assertEqual(len(entity.prior_uwregids), 0)
         return entity
 
     def _test_netid(self, netid, regid):
         pws = PWS()
         entity = pws.get_entity_by_netid(netid)
 
-        self.assertEquals(entity.uwnetid, netid, netid + "'s netid")
-        self.assertEquals(entity.uwregid, regid, netid + "'s regid")
-        self.assertEquals(len(entity.prior_uwnetids), 0)
-        self.assertEquals(len(entity.prior_uwregids), 0)
+        self.assertEqual(entity.uwnetid, netid, netid + "'s netid")
+        self.assertEqual(entity.uwregid, regid, netid + "'s regid")
+        self.assertEqual(len(entity.prior_uwnetids), 0)
+        self.assertEqual(len(entity.prior_uwregids), 0)
         return entity

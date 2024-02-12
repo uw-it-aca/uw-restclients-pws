@@ -1,4 +1,4 @@
-# Copyright 2023 UW-IT, University of Washington
+# Copyright 2024 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
 import logging
@@ -29,17 +29,17 @@ class PWSTestPersonData(TestCase):
     def test_prior_ids(self):
         pws = PWS()
         person = pws.get_person_by_netid('javerage')
-        self.assertEquals(len(person.prior_uwnetids), 1)
-        self.assertEquals(person.prior_uwnetids[0], 'javerag')
-        self.assertEquals(len(person.prior_uwregids), 1)
-        self.assertEquals(person.prior_uwregids[0],
-                          "9136CCB8F66711D5BE060004AC494FF0")
+        self.assertEqual(len(person.prior_uwnetids), 1)
+        self.assertEqual(person.prior_uwnetids[0], 'javerag')
+        self.assertEqual(len(person.prior_uwregids), 1)
+        self.assertEqual(person.prior_uwregids[0],
+                         "9136CCB8F66711D5BE060004AC494FF0")
 
     def test_by_employeeid(self):
         pws = PWS()
         person = pws.get_person_by_employee_id('123456789')
-        self.assertEquals(person.uwnetid, 'javerage', "Correct netid")
-        self.assertEquals(
+        self.assertEqual(person.uwnetid, 'javerage', "Correct netid")
+        self.assertEqual(
             person.uwregid,
             '9136CCB8F66711D5BE060004AC494FFE', "Correct regid")
 
@@ -55,9 +55,9 @@ class PWSTestPersonData(TestCase):
     def test_by_student_number(self):
         pws = PWS()
         person = pws.get_person_by_student_number('1234567')
-        self.assertEquals(person.uwnetid, 'javerage', "Correct netid")
-        self.assertEquals(person.uwregid,
-                          '9136CCB8F66711D5BE060004AC494FFE', "Correct regid")
+        self.assertEqual(person.uwnetid, 'javerage', "Correct netid")
+        self.assertEqual(person.uwregid,
+                         '9136CCB8F66711D5BE060004AC494FFE', "Correct regid")
 
         # Valid non-existent student number
         self.assertRaises(DataFailureException,
@@ -77,49 +77,49 @@ class PWSTestPersonData(TestCase):
     def test_names(self):
         pws = PWS()
         person = pws.get_person_by_netid('javerage')
-        self.assertEquals(person.surname, 'STUDENT')
-        self.assertEquals(person.first_name, 'JAMES AVERAGE')
-        self.assertEquals(person.full_name, 'JAMES AVERAGE STUDENT')
-        self.assertEquals(person.preferred_first_name, 'Jamesy')
-        self.assertEquals(person.preferred_middle_name, '')
-        self.assertEquals(person.preferred_surname, 'McJamesy')
-        self.assertEquals(person.display_name, 'Jamesy McJamesy')
-        self.assertEquals(person.student_number, "1033334")
-        self.assertEquals(person.employee_id, "123456789")
-        self.assertEquals(person.student_class, "Junior")
+        self.assertEqual(person.surname, 'STUDENT')
+        self.assertEqual(person.first_name, 'JAMES AVERAGE')
+        self.assertEqual(person.full_name, 'JAMES AVERAGE STUDENT')
+        self.assertEqual(person.preferred_first_name, 'Jamesy')
+        self.assertEqual(person.preferred_middle_name, '')
+        self.assertEqual(person.preferred_surname, 'McJamesy')
+        self.assertEqual(person.display_name, 'Jamesy McJamesy')
+        self.assertEqual(person.student_number, "1033334")
+        self.assertEqual(person.employee_id, "123456789")
+        self.assertEqual(person.student_class, "Junior")
 
     def test_formatted_name(self):
         pws = PWS()
         person = pws.get_person_by_netid('javerage')
-        self.assertEquals(person.get_formatted_name(), person.display_name)
+        self.assertEqual(person.get_formatted_name(), person.display_name)
 
         person.display_name = 'JAMES AVERAGE STUDENT'
-        self.assertEquals(person.get_formatted_name(), "James Average Student")
+        self.assertEqual(person.get_formatted_name(), "James Average Student")
 
         person.display_name = ''
-        self.assertEquals(person.get_formatted_name(), "James Average Student")
+        self.assertEqual(person.get_formatted_name(), "James Average Student")
 
         person.display_name = None
-        self.assertEquals(person.get_formatted_name(), "James Average Student")
-        self.assertEquals(
+        self.assertEqual(person.get_formatted_name(), "James Average Student")
+        self.assertEqual(
             person.get_formatted_name(string_format='{first} {last}'),
             "James Student")
 
     def test_first_last_name(self):
         pws = PWS()
         person = pws.get_person_by_netid('javerage')
-        self.assertEquals(person.get_first_last_name(),
-                          ('Jamesy', 'McJamesy'))
+        self.assertEqual(person.get_first_last_name(),
+                         ('Jamesy', 'McJamesy'))
 
         person = pws.get_person_by_netid('javerage')
         person.preferred_surname = None
-        self.assertEquals(person.get_first_last_name(),
-                          ('JAMES AVERAGE', 'STUDENT'))
+        self.assertEqual(person.get_first_last_name(),
+                         ('JAMES AVERAGE', 'STUDENT'))
 
         person = pws.get_person_by_netid('javerage')
         person.preferred_first_name = ''
-        self.assertEquals(person.get_first_last_name(),
-                          ('JAMES AVERAGE', 'STUDENT'))
+        self.assertEqual(person.get_first_last_name(),
+                         ('JAMES AVERAGE', 'STUDENT'))
 
     def test_bad_netids(self):
         # Invalid data, should throw exceptions
@@ -176,58 +176,58 @@ class PWSTestPersonData(TestCase):
         person2 = pws.get_person_by_regid("7718EB38AE3411D689DA0004AC494FFE")
         person3 = pws.get_person_by_regid("9136CCB8F66711D5BE060004AC494FFE")
 
-        self.assertEquals(person1 == person2, True, "persons are equal")
-        self.assertEquals(person1 == person3, False, "persons are inequal")
+        self.assertEqual(person1 == person2, True, "persons are equal")
+        self.assertEqual(person1 == person3, False, "persons are inequal")
 
     def test_affiliation_data(self):
         pws = PWS()
 
         person1 = pws.get_person_by_netid("javerage")
-        self.assertEquals(person1.is_student, True)
-        self.assertEquals(person1.is_alum, True)
-        self.assertEquals(person1.is_staff, True)
-        self.assertEquals(person1.is_faculty, False)
-        self.assertEquals(person1.is_employee, True)
-        self.assertEquals(person1.student_state, "current")
+        self.assertEqual(person1.is_student, True)
+        self.assertEqual(person1.is_alum, True)
+        self.assertEqual(person1.is_staff, True)
+        self.assertEqual(person1.is_faculty, False)
+        self.assertEqual(person1.is_employee, True)
+        self.assertEqual(person1.student_state, "current")
         self.assertTrue(person1.is_alum_state_current())
         self.assertTrue(person1.is_emp_state_current())
         self.assertTrue(person1.is_stud_state_current())
 
-        self.assertEquals(person1.mailstop, '359540', "MailStop")
-        self.assertEquals(person1.home_department, "Computer Science",
-                          "HomeDepartment")
-        self.assertEquals(person1.student_number, "1033334")
-        self.assertEquals(person1.employee_id, "123456789")
-        self.assertEquals(len(person1.student_departments), 2)
-        self.assertEquals(person1.student_departments[0], "Computer Science")
+        self.assertEqual(person1.mailstop, '359540', "MailStop")
+        self.assertEqual(person1.home_department, "Computer Science",
+                         "HomeDepartment")
+        self.assertEqual(person1.student_number, "1033334")
+        self.assertEqual(person1.employee_id, "123456789")
+        self.assertEqual(len(person1.student_departments), 2)
+        self.assertEqual(person1.student_departments[0], "Computer Science")
 
         person2 = pws.get_person_by_netid("finals1")
-        self.assertEquals(person2.is_student, True)
-        self.assertEquals(person2.is_alum, True)
-        self.assertEquals(person2.is_staff, True)
-        self.assertEquals(person2.is_faculty, False)
-        self.assertEquals(person2.is_employee, True)
+        self.assertEqual(person2.is_student, True)
+        self.assertEqual(person2.is_alum, True)
+        self.assertEqual(person2.is_staff, True)
+        self.assertEqual(person2.is_faculty, False)
+        self.assertEqual(person2.is_employee, True)
 
-        self.assertEquals(person2.home_department, "C&C TEST BUDGET",
-                          "HomeDepartment")
-        self.assertEquals(person2.student_number, "1033334")
-        self.assertEquals(person2.employee_id, "123456789")
-        self.assertEquals(person2.student_class, None)
-        self.assertEquals(len(person2.student_departments), 0)
+        self.assertEqual(person2.home_department, "C&C TEST BUDGET",
+                         "HomeDepartment")
+        self.assertEqual(person2.student_number, "1033334")
+        self.assertEqual(person2.employee_id, "123456789")
+        self.assertEqual(person2.student_class, None)
+        self.assertEqual(len(person2.student_departments), 0)
 
     def _test_regid(self, netid, regid):
         pws = PWS()
         person = pws.get_person_by_regid(regid)
 
-        self.assertEquals(person.uwnetid, netid, netid + "'s netid")
-        self.assertEquals(person.uwregid, regid, netid + "'s regid")
+        self.assertEqual(person.uwnetid, netid, netid + "'s netid")
+        self.assertEqual(person.uwregid, regid, netid + "'s regid")
 
     def _test_netid(self, netid, regid):
         pws = PWS()
         person = pws.get_person_by_netid(netid)
 
-        self.assertEquals(person.uwnetid, netid, netid + "'s netid")
-        self.assertEquals(person.uwregid, regid, netid + "'s regid")
+        self.assertEqual(person.uwnetid, netid, netid + "'s netid")
+        self.assertEqual(person.uwregid, regid, netid + "'s regid")
 
     def test_employee_data(self):
         pws = PWS()

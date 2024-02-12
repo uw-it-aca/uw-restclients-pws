@@ -1,4 +1,4 @@
-# Copyright 2023 UW-IT, University of Washington
+# Copyright 2024 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
 import logging
@@ -13,7 +13,7 @@ class TestModels(TestCase):
             "EWPDept": "University of Washington",
             "EWPTitle": "Retiree",
             "Primary": True})
-        self.assertEquals(
+        self.assertEqual(
             pos.json_data(),
             {'department': "University of Washington",
              'title': "Retiree",
@@ -84,8 +84,8 @@ class TestModels(TestCase):
         )
         self.assertEqual(person.display_name, "Bill Teacher")
         self.assertEqual(person.get_formatted_name(), "Bill Teacher")
-        self.assertEquals(person.employee_state, "current")
-        self.assertEquals(person.alumni_state, "current")
+        self.assertEqual(person.employee_state, "current")
+        self.assertEqual(person.alumni_state, "current")
         self.assertTrue(person == person)
         self.assertEqual(
             person.json_data(),
