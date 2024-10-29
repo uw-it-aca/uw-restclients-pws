@@ -92,6 +92,7 @@ class TestModels(TestCase):
             person.json_data(),
             {'uwnetid': 'bill',
              'uwregid': 'FBB38FE46A7C11D5A4AE0004AC494FFE',
+             'repository_time_stamp': '1/1/2020 1:23:45 AM',
              'is_test_entity': False,
              'first_name': 'Bill Average',
              'surname': 'Teacher',
