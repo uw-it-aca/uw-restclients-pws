@@ -46,7 +46,7 @@ class Person(models.Model):
     preferred_surname = models.CharField(max_length=250)
     pronouns = models.CharField(max_length=128)
     whitepages_publish = models.NullBooleanField()
-    repository_time_stamp = models.DateTimeField() 
+    repository_time_stamp = models.DateTimeField()
 
     # Affiliation flags
     is_student = models.BooleanField(default=False)
@@ -207,7 +207,7 @@ class Person(models.Model):
         person.preferred_first_name = data.get("PreferredFirstName")
         person.preferred_middle_name = data.get("PreferredMiddleName")
         person.preferred_surname = data.get("PreferredSurname")
-        person.pronouns = data.get("Pronouns"
+        person.pronouns = data.get("Pronouns")
         person.repository_time_stamp = data.get("RepositoryTimeStamp")
 
         for affiliation in data.get("EduPersonAffiliations", []):
