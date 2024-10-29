@@ -33,6 +33,7 @@ class TestModels(TestCase):
              "PreferredFirstName": None,
              "PreferredSurname": None,
              "RegisteredName": "Bill Average Teacher",
+             "RepositoryTimeStamp": "1/1/2020 1:23:45 AM",
              "IsTestEntity": False,
              "RegisteredSurname": "Teacher",
              "EduPersonAffiliations": [
