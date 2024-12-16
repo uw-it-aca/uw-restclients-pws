@@ -46,6 +46,7 @@ class Person(models.Model):
     preferred_surname = models.CharField(max_length=250)
     pronouns = models.CharField(max_length=128)
     whitepages_publish = models.NullBooleanField()
+    repository_time_stamp = models.DateTimeField()
 
     # Affiliation flags
     is_student = models.BooleanField(default=False)
@@ -140,6 +141,9 @@ class Person(models.Model):
             'surname': self.surname,
             'full_name': self.full_name,
             'display_name': self.display_name,
+            'preferred_first_name': self.preferred_first_name,
+            'preferred_middle_name': self.preferred_middle_name,
+            'preferred_surname': self.preferred_surname,
             'pronouns': self.pronouns,
             'whitepages_publish': self.whitepages_publish,
             'employee_id': self.employee_id,
@@ -155,6 +159,7 @@ class Person(models.Model):
             'mailstop': self.mailstop,
             'home_department': self.home_department,
             'publish_in_emp_directory': self.publish_in_emp_directory,
+            'repository_time_stamp': self.repository_time_stamp,
             'student_number': self.student_number,
             'student_system_key': self.student_system_key,
             'student_class': self.student_class,
@@ -206,6 +211,7 @@ class Person(models.Model):
         person.preferred_middle_name = data.get("PreferredMiddleName")
         person.preferred_surname = data.get("PreferredSurname")
         person.pronouns = data.get("Pronouns")
+        person.repository_time_stamp = data.get("RepositoryTimeStamp")
 
         for affiliation in data.get("EduPersonAffiliations", []):
             if affiliation == "student":
