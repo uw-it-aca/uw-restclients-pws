@@ -7,6 +7,11 @@ class InvalidStudentNumber(Exception):
     pass
 
 
+class InvalidStudentSystemKey(Exception):
+    """Exception for invalid student system key."""
+    pass
+
+
 class InvalidIdCardPhotoSize(Exception):
     """Exception for invalid photo size."""
     pass
