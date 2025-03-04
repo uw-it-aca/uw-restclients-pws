@@ -1,4 +1,4 @@
-# Copyright 2024 UW-IT, University of Washington
+# Copyright 2025 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
 import logging
@@ -67,6 +67,14 @@ class PWSTestPersonData(TestCase):
         self.assertRaises(InvalidStudentNumber,
                           pws.get_person_by_student_number,
                           '123456')
+
+    def test_by_student_system_key(self):
+        pws = PWS()
+        self.assertTrue(pws.valid_student_system_key('001234567'))
+        self.assertTrue(pws.valid_student_system_key(123456789))
+        self.assertFalse(pws.valid_student_system_key('00123456789'))
+        self.assertFalse(pws.valid_student_system_key('00123456'))
+        self.assertFalse(pws.valid_student_system_key('00123456'))
 
     def test_person_search(self):
         persons = PWS().person_search(changed_since_date=2019)

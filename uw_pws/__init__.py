@@ -1,4 +1,4 @@
-# Copyright 2024 UW-IT, University of Washington
+# Copyright 2025 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
 """
@@ -12,7 +12,8 @@ import re
 from restclients_core.exceptions import (
     InvalidRegID, InvalidNetID, InvalidEmployeeID, DataFailureException)
 from uw_pws.exceptions import (
-    InvalidStudentNumber, InvalidIdCardPhotoSize, InvalidProxRFID)
+    InvalidStudentNumber, InvalidStudentSystemKey, InvalidIdCardPhotoSize,
+    InvalidProxRFID)
 from uw_pws.dao import PWS_DAO
 from uw_pws.models import Person, Entity
 
@@ -35,6 +36,7 @@ class PWS(object):
         self._re_regid = re.compile(r'^[A-F0-9]{32}$', re.I)
         self._re_employee_id = re.compile(r'^\d{9}$')
         self._re_student_number = re.compile(r'^\d{7}$')
+        self._re_student_system_key = re.compile(r'^\d{9}$')
         self._re_prox_rfid = re.compile(r'^\d{16}$')
         self.dao = PWS_DAO()
 
@@ -283,6 +285,11 @@ class PWS(object):
         return (
             student_number is not None and
             self._re_student_number.match(str(student_number)) is not None)
+
+    def valid_student_system_key(self, system_key):
+        return (
+            system_key is not None and
+            self._re_student_system_key.match(str(system_key)) is not None)
 
     def valid_prox_rfid(self, prox_rfid):
         return (prox_rfid is not None and
