@@ -71,7 +71,7 @@ class PWSTestPersonData(TestCase):
     def test_by_student_system_key(self):
         pws = PWS()
         self.assertTrue(pws.valid_student_system_key('001234567'))
-        self.assertTrue(pws.valid_student_system_key(001234567))
+        self.assertTrue(pws.valid_student_system_key(123456789))
         self.assertFalse(pws.valid_student_system_key('00123456789'))
         self.assertFalse(pws.valid_student_system_key('00123456'))
         self.assertFalse(pws.valid_student_system_key('00123456'))
