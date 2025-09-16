@@ -21,7 +21,7 @@ setup(
     name='UW-RestClients-PWS',
     version=VERSION,
     packages=['uw_pws'],
-    author="UW-IT T&LS",
+    author="UW-IT SETS",
     author_email="aca-it@uw.edu",
     include_package_data=True,
     install_requires=[
