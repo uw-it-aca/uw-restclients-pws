@@ -175,10 +175,9 @@ class Person(models.Model):
         if (self.display_name is not None and len(self.display_name) and
                 not self.display_name.isupper()):
             return self.display_name
-        else:
-            name = nameparse(f"{self.first_name} {self.surname}")
-            return name.capitalized().render(
-                string_format.replace('{first}', '{given}').replace('last', 'family'))
+
+        return nameparse(f"{self.first_name} {self.surname}").capitalized().render(
+            string_format.replace('{first}', '{given}').replace('last', 'family'))
 
     def get_first_last_name(self):
         """
