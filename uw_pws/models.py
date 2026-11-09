@@ -1,7 +1,7 @@
 # Copyright 2026 UWIT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
-from nameparser import HumanName
+from nameparser import parse as nameparse
 from restclients_core import models
 
 
@@ -171,15 +171,14 @@ class Person(models.Model):
             'student_state': self.student_state
         }
 
-    def get_formatted_name(self, string_format='{first} {middle} {last}'):
+    def get_formatted_name(self, string_format='{given} {middle} {family}'):
         if (self.display_name is not None and len(self.display_name) and
                 not self.display_name.isupper()):
             return self.display_name
         else:
-            name = HumanName(f"{self.first_name} {self.surname}")
-            name.capitalize()
-            name.string_format = string_format
-            return str(name)
+            name = nameparse(f"{self.first_name} {self.surname}")
+            return name.capitalized().render(
+                string_format.replace('{first}', '{given}').replace('last', 'family'))
 
     def get_first_last_name(self):
         """
