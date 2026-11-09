@@ -1,7 +1,7 @@
 # Copyright 2026 UWIT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
-from nameparser import parse
+from nameparser import parse as nameparse
 from restclients_core import models
 
 
@@ -176,7 +176,7 @@ class Person(models.Model):
                 not self.display_name.isupper()):
             return self.display_name
         else:
-            name = parse(f"{self.first_name} {self.surname}").given
+            name = nameparse(f"{self.first_name} {self.surname}").given
             name.capitalize()
             name.string_format = string_format
             return str(name)
