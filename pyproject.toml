@@ -14,7 +14,7 @@ authors = [
 requires-python = ">=3.8"
 dependencies = [
     "uw-restclients-core",
-    "nameparser>=3.0",
+    "nameparser~=1.4",
 ]
 classifiers = [
     "Intended Audience :: Developers",
