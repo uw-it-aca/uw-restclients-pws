@@ -4,9 +4,10 @@
 """
 Contains UW PWS DAO implementations.
 """
-from restclients_core.dao import DAO
-from os.path import abspath, dirname
 import os
+from os.path import abspath, dirname
+
+from restclients_core.dao import DAO
 
 
 class PWS_DAO(DAO):

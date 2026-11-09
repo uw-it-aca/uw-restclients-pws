@@ -5,18 +5,28 @@
 This is the interface for interacting with the Person Web Service.
 """
 
-from io import BytesIO as streamIO
-from urllib.parse import urlencode
 import json
 import re
-from restclients_core.exceptions import (
-    InvalidRegID, InvalidNetID, InvalidEmployeeID, DataFailureException)
-from uw_pws.exceptions import (
-    InvalidStudentNumber, InvalidStudentSystemKey, InvalidIdCardPhotoSize,
-    InvalidProxRFID)
-from uw_pws.dao import PWS_DAO
-from uw_pws.models import Person, Entity
+from io import BytesIO as streamIO
+from urllib.parse import urlencode
 
+from restclients_core.exceptions import (
+    DataFailureException,
+    InvalidEmployeeID,
+    InvalidNetID,
+    InvalidRegID,
+)
+
+from uw_pws.dao import PWS_DAO
+from uw_pws.exceptions import (
+    InvalidIdCardPhotoSize,
+    InvalidProxRFID,
+    InvalidStudentNumber,
+)
+from uw_pws.exceptions import (
+    InvalidStudentSystemKey as InvalidStudentSystemKey,
+)
+from uw_pws.models import Entity, Person
 
 PERSON_PREFIX = '/identity/v2/person'
 ENTITY_PREFIX = '/identity/v2/entity'
@@ -24,7 +34,7 @@ CARD_PREFIX = '/idcard/v1/card'
 PHOTO_PREFIX = '/idcard/v1/photo'
 
 
-class PWS(object):
+class PWS:
     """
     The PWS object has methods for getting person information.
     """
@@ -32,8 +42,8 @@ class PWS(object):
         self.actas = actas
         # netid format:
         #     https://wiki.cac.washington.edu/display/SMW/UW+NetID+Namespace
-        self._re_netid = re.compile(r'^[a-z][a-z0-9\-\_\.]{,127}$', re.I)
-        self._re_regid = re.compile(r'^[A-F0-9]{32}$', re.I)
+        self._re_netid = re.compile(r'^[a-z][a-z0-9\-\_\.]{,127}$', re.IGNORECASE)
+        self._re_regid = re.compile(r'^[A-F0-9]{32}$', re.IGNORECASE)
         self._re_employee_id = re.compile(r'^\d{9}$')
         self._re_student_number = re.compile(r'^\d{7}$')
         self._re_student_system_key = re.compile(r'^\d{9}$')
@@ -73,7 +83,7 @@ class PWS(object):
         if not self.valid_employee_id(employee_id):
             raise InvalidEmployeeID(employee_id)
 
-        url = f"{PERSON_PREFIX}.json?{urlencode({"employee_id": employee_id})}&verbose=on"
+        url = f"{PERSON_PREFIX}.json?{urlencode({'employee_id': employee_id})}&verbose=on"
         data = self._get_resource(url)
 
         # Search does not return a full person resource
@@ -90,7 +100,7 @@ class PWS(object):
         if not self.valid_student_number(student_number):
             raise InvalidStudentNumber(student_number)
 
-        url = f"{PERSON_PREFIX}.json?{urlencode({"student_number": student_number})}&verbose=on"
+        url = f"{PERSON_PREFIX}.json?{urlencode({'student_number': student_number})}&verbose=on"
         data = self._get_resource(url)
 
         # Search does not return a full person resource
@@ -159,7 +169,7 @@ class PWS(object):
         if not self.valid_prox_rfid(prox_rfid):
             raise InvalidProxRFID(prox_rfid)
 
-        url = f"{CARD_PREFIX}.json?{urlencode({"prox_rfid": prox_rfid})}"
+        url = f"{CARD_PREFIX}.json?{urlencode({'prox_rfid': prox_rfid})}"
         data = self._get_resource(url)
         if not len(data["Cards"]):
             raise DataFailureException(url, 404, "No card found")

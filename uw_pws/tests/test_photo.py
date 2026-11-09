@@ -2,11 +2,12 @@
 # SPDX-License-Identifier: Apache-2.0
 
 from unittest import TestCase
-from uw_pws.models import Person
+
+from restclients_core.exceptions import InvalidNetID, InvalidRegID
+
 from uw_pws import PWS
 from uw_pws.exceptions import InvalidIdCardPhotoSize
-from restclients_core.exceptions import (
-    DataFailureException, InvalidNetID, InvalidRegID)
+from uw_pws.models import Person
 from uw_pws.util import fdao_pws_override
 
 

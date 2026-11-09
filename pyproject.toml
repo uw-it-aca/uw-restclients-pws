@@ -33,6 +33,19 @@ include-package-data = true
 [tool.setuptools.dynamic]
 version = {file = "uw_pws/VERSION"}
 
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.format]
+indent-style = "space"
+
+[tool.ruff.lint]
+ignore = [
+    "BLE001",
+    "PLR0124",
+    "B006",
+]
+
 [tool.coverage.run]
 branch = true
 source = ["uw_pws"]

@@ -1,12 +1,16 @@
 # Copyright 2025 UW-IT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
-import logging
 from unittest import TestCase
+
+from restclients_core.exceptions import (
+    DataFailureException,
+    InvalidEmployeeID,
+    InvalidNetID,
+    InvalidRegID,
+)
+
 from uw_pws import PWS
-from restclients_core.exceptions import (InvalidRegID, InvalidNetID,
-                                         DataFailureException,
-                                         InvalidEmployeeID)
 from uw_pws.exceptions import InvalidStudentNumber
 from uw_pws.util import fdao_pws_override
 

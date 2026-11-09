@@ -75,7 +75,7 @@ class Person(models.Model):
     alumni_state = models.CharField(max_length=16, default=None)
 
     def __init__(self, *args, **kwargs):
-        super(Person, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.prior_uwnetids = []
         self.prior_uwregids = []
         self.addresses = []
@@ -272,7 +272,7 @@ class Entity(models.Model):
     is_person = models.BooleanField(default=False)
 
     def __init__(self, *args, **kwargs):
-        super(Entity, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.prior_uwnetids = []
         self.prior_uwregids = []
 
