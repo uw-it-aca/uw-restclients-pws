@@ -49,7 +49,7 @@ class PWS(object):
         if not self.valid_uwregid(regid):
             raise InvalidRegID(regid)
 
-        url = "{}/{}/full.json".format(PERSON_PREFIX, regid.upper())
+        url = f"{PERSON_PREFIX}/{regid.upper()}/full.json"
         return Person.from_json(self._get_resource(url))
 
     def get_person_by_netid(self, netid):
@@ -61,7 +61,7 @@ class PWS(object):
         if not self.valid_uwnetid(netid):
             raise InvalidNetID(netid)
 
-        url = "{}/{}/full.json".format(PERSON_PREFIX, netid.lower())
+        url = f"{PERSON_PREFIX}/{netid.lower()}/full.json"
         return Person.from_json(self._get_resource(url))
 
     def get_person_by_employee_id(self, employee_id):
@@ -73,8 +73,7 @@ class PWS(object):
         if not self.valid_employee_id(employee_id):
             raise InvalidEmployeeID(employee_id)
 
-        url = "{}.json?{}&verbose=on".format(
-            PERSON_PREFIX, urlencode({"employee_id": employee_id}))
+        url = f"{PERSON_PREFIX}.json?{urlencode({"employee_id": employee_id})}&verbose=on"
         data = self._get_resource(url)
 
         # Search does not return a full person resource
@@ -91,8 +90,7 @@ class PWS(object):
         if not self.valid_student_number(student_number):
             raise InvalidStudentNumber(student_number)
 
-        url = "{}.json?{}&verbose=on".format(
-            PERSON_PREFIX, urlencode({"student_number": student_number}))
+        url = f"{PERSON_PREFIX}.json?{urlencode({"student_number": student_number})}&verbose=on"
         data = self._get_resource(url)
 
         # Search does not return a full person resource
@@ -135,8 +133,7 @@ class PWS(object):
         # Boolean params must be lowercased
         params = [(k, str(v).lower() if isinstance(v, bool) else v) for (
             k, v) in kwargs.items()]
-        url = "{}.json?{}&page_size=250&verbose=on".format(
-            PERSON_PREFIX, urlencode(params))
+        url = f"{PERSON_PREFIX}.json?{urlencode(params)}&page_size=250&verbose=on"
 
         persons = []
 
@@ -162,8 +159,7 @@ class PWS(object):
         if not self.valid_prox_rfid(prox_rfid):
             raise InvalidProxRFID(prox_rfid)
 
-        url = "{}.json?{}".format(
-            CARD_PREFIX, urlencode({"prox_rfid": prox_rfid}))
+        url = f"{CARD_PREFIX}.json?{urlencode({"prox_rfid": prox_rfid})}"
         data = self._get_resource(url)
         if not len(data["Cards"]):
             raise DataFailureException(url, 404, "No card found")
@@ -182,8 +178,7 @@ class PWS(object):
         # Boolean params must be lowercased
         params = [(k, str(v).lower() if isinstance(v, bool) else v) for (
             k, v) in kwargs.items()]
-        url = "{}.json?{}&page_size=250".format(
-            ENTITY_PREFIX, urlencode(params))
+        url = f"{ENTITY_PREFIX}.json?{urlencode(params)}&page_size=250"
 
         entities = []
 
@@ -211,7 +206,7 @@ class PWS(object):
         if not self.valid_uwregid(regid):
             raise InvalidRegID(regid)
 
-        url = "{}/{}.json".format(ENTITY_PREFIX, regid.upper())
+        url = f"{ENTITY_PREFIX}/{regid.upper()}.json"
         return Entity.from_json(self._get_resource(url))
 
     def get_entity_by_netid(self, netid):
@@ -223,7 +218,7 @@ class PWS(object):
         if not self.valid_uwnetid(netid):
             raise InvalidNetID(netid)
 
-        url = "{}/{}.json".format(ENTITY_PREFIX, netid.lower())
+        url = f"{ENTITY_PREFIX}/{netid.lower()}.json"
         return Entity.from_json(self._get_resource(url))
 
     def get_idcard_photo(self, regid, size="medium"):
@@ -242,7 +237,7 @@ class PWS(object):
                 not re.match(r"[1-9]\d{1,3}$", size)):
             raise InvalidIdCardPhotoSize(size)
 
-        url = "{}/{}-{}.jpg".format(PHOTO_PREFIX, regid.upper(), size)
+        url = f"{PHOTO_PREFIX}/{regid.upper()}-{size}.jpg"
 
         headers = {"Accept": "image/jpeg"}
 
