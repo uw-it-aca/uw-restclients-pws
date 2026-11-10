@@ -1,7 +1,7 @@
-# Copyright 2025 UW-IT, University of Washington
+# Copyright 2026 UWIT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
-from nameparser import HumanName
+from nameparser import parse as nameparse
 from restclients_core import models
 
 
@@ -75,7 +75,7 @@ class Person(models.Model):
     alumni_state = models.CharField(max_length=16, default=None)
 
     def __init__(self, *args, **kwargs):
-        super(Person, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.prior_uwnetids = []
         self.prior_uwregids = []
         self.addresses = []
@@ -171,15 +171,13 @@ class Person(models.Model):
             'student_state': self.student_state
         }
 
-    def get_formatted_name(self, string_format='{first} {middle} {last}'):
+    def get_formatted_name(self, string_format='{given} {middle} {family}'):
         if (self.display_name is not None and len(self.display_name) and
                 not self.display_name.isupper()):
             return self.display_name
-        else:
-            name = HumanName("{} {}".format(self.first_name, self.surname))
-            name.capitalize()
-            name.string_format = string_format
-            return str(name)
+
+        return nameparse(f"{self.first_name} {self.surname}").capitalized().render(
+            string_format.replace('{first}', '{given}').replace('last', 'family'))
 
     def get_first_last_name(self):
         """
@@ -272,7 +270,7 @@ class Entity(models.Model):
     is_person = models.BooleanField(default=False)
 
     def __init__(self, *args, **kwargs):
-        super(Entity, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.prior_uwnetids = []
         self.prior_uwregids = []
 

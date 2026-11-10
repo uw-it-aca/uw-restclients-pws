@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "UW-RestClients-PWS"
+dynamic = ["version"]
+description = "A library for connecting to the Person Web Service at the University of Washington"
+readme = "README.md"
+license = {text = "Apache License, Version 2.0"}
+authors = [
+    {name = "UW-IT SETS", email = "aca-it@uw.edu"}
+]
+requires-python = ">=3.8"
+dependencies = [
+    "uw-restclients-core",
+    "nameparser>=3.0",
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+]
+
+[project.urls]
+Homepage = "https://github.com/uw-it-aca/uw-restclients-pws"
+
+[tool.setuptools]
+packages = ["uw_pws"]
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = {file = "uw_pws/VERSION"}
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.format]
+indent-style = "space"
+
+[tool.ruff.lint]
+ignore = [
+    "BLE001",
+    "PLR0124",
+    "B006",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["uw_pws"]
+include = ["uw_pws/*"]
