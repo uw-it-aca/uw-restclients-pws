@@ -1,12 +1,13 @@
-# Copyright 2025 UW-IT, University of Washington
+# Copyright 2026 UWIT, University of Washington
 # SPDX-License-Identifier: Apache-2.0
 
 """
 Contains UW PWS DAO implementations.
 """
-from restclients_core.dao import DAO
-from os.path import abspath, dirname
 import os
+from os.path import abspath, dirname
+
+from restclients_core.dao import DAO
 
 
 class PWS_DAO(DAO):
